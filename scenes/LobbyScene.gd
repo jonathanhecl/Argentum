@@ -10,11 +10,8 @@ enum State{
 }
  
 const IP_SERVER = "127.0.0.1"
-const IP_PORT = 443
+const IP_PORT = 7666
  
-#tcp://0.tcp.sa.ngrok.io:17560 
-#tcp://0.tcp.sa.ngrok.io:15952 
-
 @onready var user_name:LineEdit = find_child("UserName")
 @onready var user_password:LineEdit = find_child("UserPassword")
  

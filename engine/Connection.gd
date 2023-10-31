@@ -9,6 +9,7 @@ signal message_received(data)
 #Godot 3 var _client = WebSocketClient.new()
 var _client = StreamPeerTCP.new()
 var _wrapped_client
+var _connected = false
 
 func _ready():
 	_client.set_no_delay(true)	
@@ -32,11 +33,21 @@ func _ready():
 
 func _process(_delta): 
 	#_client.poll()
-	if _client.get_status() == StreamPeerTCP.STATUS_CONNECTED:
-		emit_signal("connected") 
+	if _client.get_status() == StreamPeerTCP.STATUS_CONNECTING:
+		print("connecting...") # await
+	elif _client.get_status() == StreamPeerTCP.STATUS_CONNECTED:
+		if !_connected:
+			_wrapped_client = PacketPeerStream.new()
+			_wrapped_client.set_stream_peer(_client)
+			emit_signal("connected")
+			_connected = true
 		poll_server()
+	elif _client.get_status() == StreamPeerTCP.STATUS_NONE:
+		emit_signal("disconnected")
+		_connected = false
 	elif _client.get_status() == StreamPeerTCP.STATUS_ERROR:
 		emit_signal("disconnected")
+		_connected = false
 
 func disconnect_from_server():
 	_client.disconnect_from_host()
@@ -44,12 +55,11 @@ func disconnect_from_server():
 func connect_to_server(ip, port):
 	#return _client.connect_to_url(websocket_url % [ip, port])
 	_client.connect_to_host(ip, port)
-	if _client.get_status() == StreamPeerTCP.STATUS_CONNECTED:
-		_wrapped_client = PacketPeerStream.new()
-		_wrapped_client.set_stream_peer(_client)
+	print(_client.get_status(), ip, port)
 
 func send_data(data):
 	#_client.get_peer(1).put_packet(data)
+	print("Sending data: %s" % data)
 	if _client.get_status() == StreamPeerTCP.STATUS_CONNECTED:
 		_wrapped_client.put_var(data)
 		var error = _wrapped_client.get_packet_error()
@@ -57,6 +67,7 @@ func send_data(data):
 			print_debug("Error on packet put: %s" % error)
 
 func poll_server():	
+	print("poll_server")
 	while _wrapped_client.get_available_packet_count() > 0:
 		var msg = _wrapped_client.get_var()
 		var error = _wrapped_client.get_packet_error()
