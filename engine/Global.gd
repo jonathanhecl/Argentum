@@ -1,6 +1,6 @@
 extends Node
 
-const grh_data = []
+var grh_data = []
 var bodies_data = {}
 var heads_data = {}
 var helmets_data = {}
@@ -171,12 +171,15 @@ func _ready():
 	_load_ao_resources()
 	
 func load_json_from_file(filename:String):
-	var file = File.new()
-	file.open(filename, file.READ)
+	# Godot 3
+	# var file = File.new()
+	# file.open(filename, file.READ)
+	var file = FileAccess.open(filename, FileAccess.READ)
 	
 	var json = file.get_as_text()
 	var test_json_conv = JSON.new()
-	test_json_conv.parse(json).result
+	# Godot 3 test_json_conv.parse(json).result
+	test_json_conv.parse(json)
 	var json_result = test_json_conv.get_data()
 	
 	file.close()
@@ -186,8 +189,10 @@ func _load_ao_resources():
 	pass
 		
 func _load_grh_data():
-	var file = File.new()
-	file.open("res://assets/init/graficos.ind", File.READ)
+	# Godot 3
+	# var file = File.new()
+	# file.open("res://assets/init/graficos.ind", File.READ)
+	var file = FileAccess.open("res://assets/init/graficos.ind", FileAccess.READ)
 	
 	var content = file.get_buffer(file.get_length())
 	var buffer = StreamPeerBuffer.new()

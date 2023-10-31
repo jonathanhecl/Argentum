@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/CreateCharacter.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/GameScene.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://ce2b7ta1mef02" path="res://scenes/GameScene.tscn" id="3"]
 [ext_resource type="Theme" path="res://assets/theme.theme" id="4"]
 
 [node name="LobbyScene" type="Node"]
