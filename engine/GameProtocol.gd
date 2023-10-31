@@ -480,7 +480,7 @@ func _handle_update_tag_and_status(buffer: StreamPeer) -> Dictionary:
 	var data = {}
 	data.char_id = buffer.get_16()
 	data.criminal = buffer.get_u8()
-	data.userTag = buffer.get_utf8_string()
+	data.userTag = buffer.get_utf8_string_argentum()
 	return data
 
 
@@ -505,7 +505,7 @@ func _handle_user_hit_npc(buffer: StreamPeerBuffer) -> int:
 
 
 func _handle_error_msg(buffer: StreamPeerBuffer):
-	emit_signal("error_message", buffer.get_utf8_string())
+	emit_signal("error_message", buffer.get_utf8_string_argentum())
 
 
 func _handle_logged(_buffer: StreamPeerBuffer):
@@ -525,7 +525,7 @@ func _handle_change_inventory_slot(buffer: StreamPeerBuffer) -> Dictionary:
 
 	data.slot = buffer.get_u8()
 	data.obj_index = buffer.get_16()
-	data.name = buffer.get_utf8_string()
+	data.name = buffer.get_utf8_string_argentum()
 	data.amount = buffer.get_16()
 	data.equipped = buffer.get_u8()
 	data.grh_index = buffer.get_16()
@@ -543,7 +543,7 @@ func _handle_change_spell_slot(buffer: StreamPeerBuffer) -> Dictionary:
 
 	data.slot = buffer.get_u8()
 	data.spell_id = buffer.get_16()
-	data.spell_name = buffer.get_utf8_string()
+	data.spell_name = buffer.get_utf8_string_argentum()
 
 	return data
 
@@ -617,7 +617,7 @@ func _handle_character_create(buffer: StreamPeerBuffer) -> Dictionary:
 	data.helmet = buffer.get_16()
 	data.fx = buffer.get_16()
 	data.fx_loop = buffer.get_16()
-	data.name = buffer.get_utf8_string()
+	data.name = buffer.get_utf8_string_argentum()
 	data.criminal = buffer.get_u8()
 	data.privs = buffer.get_u8()
 
@@ -667,7 +667,7 @@ func _handle_update_hunger_and_thirst(buffer: StreamPeerBuffer) -> Dictionary:
 
 
 func _handle_guild_chat(buffer: StreamPeerBuffer) -> String:
-	return buffer.get_utf8_string()
+	return buffer.get_utf8_string_argentum()
 
 
 func _handle_safe_mode_on(_buffer: StreamPeerBuffer):
@@ -704,14 +704,14 @@ func _handle_tain_toggle(_buffer: StreamPeerBuffer):
 func _handle_console_msg(buffer: StreamPeerBuffer) -> Dictionary:
 	var data = {}
 
-	data.message = buffer.get_utf8_string()
+	data.message = buffer.get_utf8_string_argentum()
 	data.font_id = buffer.get_u8()
 
 	return data
 
 
 func _handle_show_message_box(buffer: StreamPeerBuffer) -> String:
-	return buffer.get_utf8_string()
+	return buffer.get_utf8_string_argentum()
 
 
 func _handle_character_move(buffer: StreamPeerBuffer) -> Dictionary:
@@ -731,7 +731,7 @@ func _handle_update_sta(buffer: StreamPeerBuffer) -> int:
 func _handle_chat_over_head(buffer: StreamPeerBuffer) -> Dictionary:
 	var data = {}
 
-	data.message = buffer.get_utf8_string()
+	data.message = buffer.get_utf8_string_argentum()
 	data.char_id = buffer.get_16()
 	data.color = Color(buffer.get_u8() / 255, buffer.get_u8() / 255, buffer.get_u8() / 255, 1)
 
@@ -818,8 +818,8 @@ func _handle_npc_kill_user(_buff):
 ############################################### INICIO DE WRITERS  ##########################################################################
 func write_login_existing_char(user_name: String, user_password: String):
 	auxiliarBuffer.put_u8(ClientPacketID.LoginExistingChar)
-	auxiliarBuffer.put_utf8_string(user_name)
-	auxiliarBuffer.put_utf8_string(user_password)
+	auxiliarBuffer.get_utf8_string_argentum(user_name)
+	auxiliarBuffer.get_utf8_string_argentum(user_password)
 
 	auxiliarBuffer.put_u8(0)
 	auxiliarBuffer.put_u8(12)
@@ -839,8 +839,8 @@ func write_login_new_char(
 	user_home: int
 ):
 	auxiliarBuffer.put_u8(ClientPacketID.LoginNewChar)
-	auxiliarBuffer.put_utf8_string(user_name)
-	auxiliarBuffer.put_utf8_string(user_password)
+	auxiliarBuffer.get_utf8_string_argentum(user_name)
+	auxiliarBuffer.get_utf8_string_argentum(user_password)
 
 	auxiliarBuffer.put_u8(0)
 	auxiliarBuffer.put_u8(12)
@@ -853,7 +853,7 @@ func write_login_new_char(
 	auxiliarBuffer.put_u8(user_gender)
 	auxiliarBuffer.put_u8(user_class)
 
-	auxiliarBuffer.put_utf8_string(user_email)
+	auxiliarBuffer.get_utf8_string_argentum(user_email)
 	auxiliarBuffer.put_u8(user_home)
 
 
@@ -928,7 +928,7 @@ func write_equip_item(slot: int):
 
 func write_talk(chat: String):
 	auxiliarBuffer.put_u8(ClientPacketID.Talk)
-	auxiliarBuffer.put_utf8_string(chat)
+	auxiliarBuffer.get_utf8_string_argentum(chat)
 
 
 func write_quit():

@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 		velocity = Vector2.ZERO
 		
 func _get_texture_size() -> Vector2:
-	if normal: return normal.get_size()
+	#if normal: return normal.get_size()
 	return Vector2.ZERO
 
 func _on_VirtualJoystick_pressed() -> void:
