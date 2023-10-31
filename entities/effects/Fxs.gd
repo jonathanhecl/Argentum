@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 func intialize(spriteFrames:SpriteFrames):
-	frames = spriteFrames
+	var frames = spriteFrames
 	play("default")
 
 func _on_Fxs_animation_finished() -> void:

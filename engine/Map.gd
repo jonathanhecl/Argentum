@@ -32,6 +32,19 @@ func _init() -> void:
 	_flags.resize(Global.MAP_WIDTH * Global.MAP_HEIGHT)
 	_flags.fill(0) 
 	
+func _ready():
+	load_map(34)
+
+func _input(event):
+	if event.is_action("move_up"):
+		$Camera2D.position.y -= 10
+	elif event.is_action("move_down"):
+		$Camera2D.position.y += 10
+	elif event.is_action("move_left"):
+		$Camera2D.position.x -= 10
+	elif event.is_action("move_right"):
+		$Camera2D.position.x += 10
+	
 func area_changed(x:int, y:int) -> void:
 	_min_limit_x = (int(x / 9) - 1) * 9
 	_max_limit_x = _min_limit_x + 26
@@ -214,14 +227,18 @@ func _gen_tile_set(tiles:Array) -> TileSet:
 			var source_rect = Global.grh_data[current_tile].region
 			var texture = load("res://assets/graphics/%d.png" % Global.grh_data[current_tile].file_num)
 			
-			tile_set.create_tile(tile)
-			tile_set.tile_set_region(tile, source_rect)
-			tile_set.tile_set_texture(tile, texture) 
+			# Godot 3
+			# tile_set.create_tile(tile)
+			# tile_set.tile_set_region(tile, source_rect)
+			# tile_set.tile_set_texture(tile, texture) 
 				
 	return tile_set
 
 func load_map(id:int) -> void:
-	var file = File.new()
+	# Godot 3
+	# var file = File.new()
+	# file.open("res://assets/maps/Mapa%d.map" % id, File.READ)
+	var file = FileAccess.open("res://assets/maps/Mapa%d.map" % id, FileAccess.READ)
 	var buffer = StreamPeerBuffer.new()
 	
 	var layer1 = PackedInt32Array()
@@ -232,7 +249,7 @@ func load_map(id:int) -> void:
 	var layer3 = []
 	var layer4 = []
 		
-	file.open("res://assets/maps/Mapa%d.map" % id, File.READ)
+	
 	buffer.data_array = file.get_buffer(file.get_length())
 
 	buffer.seek(2 + 255 + 4 + 4 + 8)
@@ -313,10 +330,12 @@ func load_map(id:int) -> void:
 	for y in range(Global.MAP_HEIGHT):
 		for x in range(Global.MAP_WIDTH):
 			if layer1[x + y * Global.MAP_WIDTH] > 1:
-				floor_layer.set_cell(x, y, layer1[x + y * Global.MAP_WIDTH])
+				# Godot 3 floor_layer.set_cell(x, y, layer1[x + y * Global.MAP_WIDTH])
+				floor_layer.set_cell(layer1[x + y * Global.MAP_WIDTH], Vector2i(x,y))
 
 	for i in layer2:
-		wall_layer.set_cell(i.x, i.y, i.id)
+		# Godot 3 wall_layer.set_cell(i.x, i.y, i.id)
+		wall_layer.set_cell(i.id, Vector2i(i.x,i.y))
 		
 	for i in layer3:
 		if(i.id > 0):
@@ -341,7 +360,8 @@ func load_map(id:int) -> void:
 			
 			var region = Global.grh_data[tile_id].region
 			if region.size == Vector2(32, 32):
-				from_tiles_layer.set_cell(i.x, i.y, tile_id)
+				# Godot 3 from_tiles_layer.set_cell(i.x, i.y, tile_id)
+				from_tiles_layer.set_cell(tile_id, Vector2i(i.x, i.y))
 			else:
 				var sprite = Sprite2D.new()
 				sprite.region_enabled = true 

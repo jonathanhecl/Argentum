@@ -25,3 +25,5 @@ format = 2
 
 [node name="Tiles" type="TileMap" parent="Front"]
 format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]

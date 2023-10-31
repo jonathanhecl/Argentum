@@ -6,14 +6,16 @@ signal message_received(data)
  
 const websocket_url = "ws://%s:%d"
 
-var _client = WebSocketClient.new()
+#var _client = WebSocketClient.new()
+var _client = null
 
 func _ready():
-	_client.connect("connection_closed", Callable(self, "_closed"))
-	_client.connect("connection_error", Callable(self, "_closed"))
-	_client.connect("connection_established", Callable(self, "_connected"))
-
-	_client.connect("data_received", Callable(self, "_on_data"))
+#	_client.connect("connection_closed", Callable(self, "_closed"))
+#	_client.connect("connection_error", Callable(self, "_closed"))
+#	_client.connect("connection_established", Callable(self, "_connected"))
+#
+#	_client.connect("data_received", Callable(self, "_on_data"))
+	pass
   
 func _closed(was_clean = false): 
 	print("Closed, clean: ", was_clean) 
@@ -28,7 +30,8 @@ func _on_data():
 	emit_signal("message_received", data) 
 
 func _process(_delta): 
-	_client.poll()
+	#_client.poll()
+	pass
 
 func disconnect_from_server():
 	_client.disconnect_from_host()
