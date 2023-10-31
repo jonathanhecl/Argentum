@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/102.mp3-ddef1e3cfef34b2ba13904376934451e.mp3str"
+uid="uid://jrmkhx6ri28q"
+path="res://.godot/imported/102.mp3-ddef1e3cfef34b2ba13904376934451e.mp3str"
 
 [deps]
 
 source_file="res://assets/music/102.mp3"
-dest_files=[ "res://.import/102.mp3-ddef1e3cfef34b2ba13904376934451e.mp3str" ]
+dest_files=["res://.godot/imported/102.mp3-ddef1e3cfef34b2ba13904376934451e.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

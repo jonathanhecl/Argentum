@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/effects/Fxs.gd" type="Script" id=1]
 
-[node name="Fxs" type="AnimatedSprite"]
+[node name="Fxs" type="AnimatedSprite2D"]
 self_modulate = Color( 1, 1, 1, 0.588235 )
 script = ExtResource( 1 )
 

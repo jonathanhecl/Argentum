@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/harp3.wav-0a4ca781104b96630a6f4ec7fec35bdc.sample"
+type="AudioStreamWAV"
+uid="uid://f25blhfodv4l"
+path="res://.godot/imported/harp3.wav-0a4ca781104b96630a6f4ec7fec35bdc.sample"
 
 [deps]
 
 source_file="res://assets/sounds/harp3.wav"
-dest_files=[ "res://.import/harp3.wav-0a4ca781104b96630a6f4ec7fec35bdc.sample" ]
+dest_files=["res://.godot/imported/harp3.wav-0a4ca781104b96630a6f4ec7fec35bdc.sample"]
 
 [params]
 

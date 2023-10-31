@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/14.wav-2dec257f5a75eee78c5600743486c675.sample"
+type="AudioStreamWAV"
+uid="uid://4ango771p3vc"
+path="res://.godot/imported/14.wav-2dec257f5a75eee78c5600743486c675.sample"
 
 [deps]
 
 source_file="res://assets/sounds/14.wav"
-dest_files=[ "res://.import/14.wav-2dec257f5a75eee78c5600743486c675.sample" ]
+dest_files=["res://.godot/imported/14.wav-2dec257f5a75eee78c5600743486c675.sample"]
 
 [params]
 

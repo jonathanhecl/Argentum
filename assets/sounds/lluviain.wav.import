@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/lluviain.wav-4eac281fddea8b3600dcbfd39fa24f2c.sample"
+type="AudioStreamWAV"
+uid="uid://cbe8ee6jux21k"
+path="res://.godot/imported/lluviain.wav-4eac281fddea8b3600dcbfd39fa24f2c.sample"
 
 [deps]
 
 source_file="res://assets/sounds/lluviain.wav"
-dest_files=[ "res://.import/lluviain.wav-4eac281fddea8b3600dcbfd39fa24f2c.sample" ]
+dest_files=["res://.godot/imported/lluviain.wav-4eac281fddea8b3600dcbfd39fa24f2c.sample"]
 
 [params]
 

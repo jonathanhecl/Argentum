@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/26.wav-2257353ff2e79751babab71f84de85d3.sample"
+type="AudioStreamWAV"
+uid="uid://c5lfjls3nko46"
+path="res://.godot/imported/26.wav-2257353ff2e79751babab71f84de85d3.sample"
 
 [deps]
 
 source_file="res://assets/sounds/26.wav"
-dest_files=[ "res://.import/26.wav-2257353ff2e79751babab71f84de85d3.sample" ]
+dest_files=["res://.godot/imported/26.wav-2257353ff2e79751babab71f84de85d3.sample"]
 
 [params]
 

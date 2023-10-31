@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name PlayerData
 
 const INT_ATTACK = 1500
@@ -11,14 +11,14 @@ const INT_USEITEMDCK = 220
 const INT_SENTRPU = 2000
 
 enum TimersIndex{
-	Attack 
-	Work 
-	UseItemWithU 
-	UseItemWithDblClick 
-	SendRPU 
-	CastSpell 
-	Arrows 
-	CastAttack 
+	Attack, 
+	Work, 
+	UseItemWithU, 
+	UseItemWithDblClick, 
+	SendRPU, 
+	CastSpell, 
+	Arrows, 
+	CastAttack,
 }
 
 var stats:PlayerStats
@@ -37,7 +37,7 @@ func set_timers():
 	for i in TimersIndex.size():
 		var timer = TickTimer.new()
 		
-		timer.connect("restart_tick", self, "_on_restart_tick", [i])
+		timer.connect("restart_tick", Callable(self, "_on_restart_tick").bind(i))
 		timers.append(timer)
 	
 	timers[TimersIndex.Attack].interval = INT_ATTACK

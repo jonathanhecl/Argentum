@@ -7,20 +7,20 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -281.0
-margin_top = 91.0
-margin_right = -11.0
-margin_bottom = 309.0
+offset_left = -281.0
+offset_top = 91.0
+offset_right = -11.0
+offset_bottom = 309.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="ItemsContainer" type="GridContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 263.0
-margin_bottom = 211.0
-custom_constants/vseparation = 1
-custom_constants/hseparation = 1
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 263.0
+offset_bottom = 211.0
+theme_override_constants/v_separation = 1
+theme_override_constants/h_separation = 1
 columns = 5

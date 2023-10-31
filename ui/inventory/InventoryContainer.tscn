@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/inventory/ItemsContainer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/inventory/33.png" type="Texture" id=2]
+[ext_resource path="res://assets/inventory/33.png" type="Texture2D" id=2]
 [ext_resource path="res://ui/inventory/InventoryContainer.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxTexture" id=1]
@@ -9,10 +9,10 @@ texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 496, 685 )
 
 [node name="InventoryContainer" type="ScrollContainer"]
-margin_right = 367.0
-margin_bottom = 313.0
-rect_min_size = Vector2( 367, 313 )
-custom_styles/bg = SubResource( 1 )
+offset_right = 367.0
+offset_bottom = 313.0
+custom_minimum_size = Vector2( 367, 313 )
+theme_override_styles/bg = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="ItemsContainer" parent="." instance=ExtResource( 1 )]

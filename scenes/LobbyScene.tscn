@@ -1,102 +1,103 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://264boseoei88"]
 
-[ext_resource path="res://scenes/LobbyScene.gd" type="Script" id=1]
-[ext_resource path="res://scenes/CreateCharacter.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/GameScene.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/theme.theme" type="Theme" id=4]
+[ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/CreateCharacter.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/GameScene.tscn" id="3"]
+[ext_resource type="Theme" path="res://assets/theme.theme" id="4"]
 
 [node name="LobbyScene" type="Node"]
-script = ExtResource( 1 )
-create_scene = ExtResource( 2 )
-game_scene = ExtResource( 3 )
+script = ExtResource("1")
+create_scene = ExtResource("2")
+game_scene = ExtResource("3")
 
 [node name="BtnExit" type="Button" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -107.5
-margin_top = 25.0
-margin_right = 107.5
-margin_bottom = 85.0
-theme = ExtResource( 4 )
+offset_left = -107.5
+offset_top = 25.0
+offset_right = 107.5
+offset_bottom = 85.0
+theme = ExtResource("4")
 text = "Salir"
 
 [node name="BtnConnect" type="Button" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -107.5
-margin_top = -175.0
-margin_right = 107.5
-margin_bottom = -115.0
-theme = ExtResource( 4 )
+offset_left = -107.5
+offset_top = -175.0
+offset_right = 107.5
+offset_bottom = -115.0
+theme = ExtResource("4")
 text = "Conectar"
 
 [node name="BtnCreate" type="Button" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -107.5
-margin_top = -83.0
-margin_right = 107.5
-margin_bottom = -23.0
-theme = ExtResource( 4 )
+offset_left = -107.5
+offset_top = -83.0
+offset_right = 107.5
+offset_bottom = -23.0
+theme = ExtResource("4")
 text = "Crear personaje"
 
 [node name="UserName" type="LineEdit" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -87.0
-margin_top = -302.0
-margin_right = 87.0
-margin_bottom = -278.0
-theme = ExtResource( 4 )
-align = 1
+offset_left = -87.0
+offset_top = -302.0
+offset_right = 87.0
+offset_bottom = -278.0
+theme = ExtResource("4")
 
 [node name="UserPassword" type="LineEdit" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -87.0
-margin_top = -218.0
-margin_right = 87.0
-margin_bottom = -194.0
-theme = ExtResource( 4 )
-align = 1
+offset_left = -87.0
+offset_top = -218.0
+offset_right = 87.0
+offset_bottom = -194.0
+theme = ExtResource("4")
 
 [node name="Label" type="Label" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -84.0
-margin_top = -267.0
-margin_right = 84.0
-margin_bottom = -214.0
-theme = ExtResource( 4 )
+offset_left = -84.0
+offset_top = -267.0
+offset_right = 84.0
+offset_bottom = -214.0
+theme = ExtResource("4")
 text = "Contraseña"
-align = 1
-valign = 1
 
 [node name="Label2" type="Label" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -98.5
-margin_top = -337.0
-margin_right = 98.5
-margin_bottom = -300.0
-theme = ExtResource( 4 )
+offset_left = -98.5
+offset_top = -337.0
+offset_right = 98.5
+offset_bottom = -300.0
+theme = ExtResource("4")
 text = "Nombre"
-align = 1
-valign = 1
 
 [connection signal="pressed" from="BtnExit" to="." method="_on_BtnExit_pressed"]
 [connection signal="pressed" from="BtnConnect" to="." method="_on_BtnConnect_pressed"]

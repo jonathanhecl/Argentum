@@ -27,30 +27,30 @@ const MAP_HEIGHT = 100
 const NO_ANIMAR = 2
 
 enum eClass{
-	Mage = 1    #Mago
-	Cleric      #Clérigo
-	Warrior     #Guerrero
-	Assasin     #Asesino
-	Thief       #Ladrón
-	Bard        #Bardo
-	Druid       #Druida
-	Bandit      #Bandido
-	Paladin     #Paladín
-	Hunter      #Cazador
-	Fisher      #Pescador
-	Blacksmith  #Herrero
-	Lumberjack  #Leñador
-	Miner       #Minero
-	Carpenter   #Carpintero
-	Pirat       #Pirata
+	Mage = 1 ,   #Mago
+	Cleric,      #Clérigo
+	Warrior,     #Guerrero
+	Assasin,     #Asesino
+	Thief  ,     #Ladrón
+	Bard   ,     #Bardo
+	Druid  ,     #Druida
+	Bandit ,     #Bandido
+	Paladin ,    #Paladín
+	Hunter  ,    #Cazador
+	Fisher   ,   #Pescador
+	Blacksmith,  #Herrero
+	Lumberjack,  #Leñador
+	Miner     ,  #Minero
+	Carpenter ,  #Carpintero
+	Pirat    ,   #Pirata
 }
 
 enum eCiudad{
-	cUllathorpe = 1
-	cNix
-	cBanderbill
-	cLindos
-	cArghal
+	cUllathorpe = 1,
+	cNix,
+	cBanderbill,
+	cLindos,
+	cArghal,
 }
 
 enum Heading{
@@ -61,60 +61,60 @@ enum Heading{
 }
 
 enum eRaza{
-	Humano = 1
-	Elfo
-	ElfoOscuro
-	Gnomo
-	Enano
+	Humano = 1,
+	Elfo,
+	ElfoOscuro,
+	Gnomo,
+	Enano,
  }
  
 enum eSkill{
-	Suerte = 1
-	Magia = 2
-	Robar = 3
-	Tacticas = 4
-	Armas = 5
-	Meditar = 6
-	Apunalar = 7
-	Ocultarse = 8
-	Supervivencia = 9
-	Talar = 10
-	Comerciar = 11
-	Defensa = 12
-	Pesca = 13
-	Mineria = 14
-	Carpinteria = 15
-	Herreria = 16
-	Liderazgo = 17
-	Domar = 18
-	Proyectiles = 19
-	Wrestling = 20
-	Navegacion = 21
+	Suerte = 1,
+	Magia = 2,
+	Robar = 3,
+	Tacticas = 4,
+	Armas = 5,
+	Meditar = 6,
+	Apunalar = 7,
+	Ocultarse = 8,
+	Supervivencia = 9,
+	Talar = 10,
+	Comerciar = 11,
+	Defensa = 12,
+	Pesca = 13,
+	Mineria = 14,
+	Carpinteria = 15,
+	Herreria = 16,
+	Liderazgo = 17,
+	Domar = 18,
+	Proyectiles = 19,
+	Wrestling = 20,
+	Navegacion = 21,
 }
 
 enum eAtributos{
-	Fuerza = 1
-	Agilidad = 2
-	Inteligencia = 3
-	Carisma = 4
-	Constitucion = 5
+	Fuerza = 1,
+	Agilidad = 2,
+	Inteligencia = 3,
+	Carisma = 4,
+	Constitucion = 5,
 }
 
 enum eGenero{
-	Hombre = 1
-	Mujer
+	Hombre = 1,
+	Mujer,
 }
 
 enum PlayerType {
-	None = 0 
-	User = 1 << 1
-	Consejero = 1 << 2
-	SemiDios = 1 << 3
-	Dios = 1 << 4
-	Admin = 1 << 5
-	RoleMaster = 1 << 6
-	ChaosCouncil = 1 << 7
-	RoyalCouncil = 1 << 8
+	None = 0 ,
+	User = 1 << 1,
+	Consejero = 1 << 2,
+	SemiDios = 1 << 3,
+	Dios = 1 << 4,
+	Admin = 1 << 5,
+	RoleMaster = 1 << 6,
+	ChaosCouncil = 1 << 7,
+	RoyalCouncil = 1 << 8,
 }
 
 
@@ -175,11 +175,13 @@ func load_json_from_file(filename:String):
 	file.open(filename, file.READ)
 	
 	var json = file.get_as_text()
-	var json_result = JSON.parse(json).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(json).result
+	var json_result = test_json_conv.get_data()
 	
 	file.close()
 	return json_result
-	 
+
 func _load_ao_resources():
 	pass
 		
@@ -187,7 +189,7 @@ func _load_grh_data():
 	var file = File.new()
 	file.open("res://assets/init/graficos.ind", File.READ)
 	
-	var content = file.get_buffer(file.get_len())
+	var content = file.get_buffer(file.get_length())
 	var buffer = StreamPeerBuffer.new()
 	
 	buffer.data_array = content
@@ -224,7 +226,7 @@ func _load_grh_data():
 			
 			grh.region.size.x = buffer.get_16()
 			grh.region.size.y = buffer.get_16()
-	
+		
 		grh_data[grh_id] = grh    
 	
 func heading_to_vector(heading:int) -> Vector2:
@@ -241,6 +243,6 @@ func heading_to_vector(heading:int) -> Vector2:
 	print("heading con una valor invalido")
 	return Vector2.ZERO
 
-func load_texture_from_id(id:int)-> Texture:
-	return load("res://assets/graphics/%d.png" % id) as Texture
+func load_texture_from_id(id:int)-> Texture2D:
+	return load("res://assets/graphics/%d.png" % id) as Texture2D
  

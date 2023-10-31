@@ -2,7 +2,7 @@ extends MarginContainer
 
 const ITEM_SLOT_SCENE = preload("res://ui/inventory/ItemSlot.tscn")
 
-onready var itemGrid = find_node("ItemGrid")
+@onready var itemGrid = find_child("ItemGrid")
 
 var inventory:Inventory = null
 var slot_selected:int = -1
@@ -10,11 +10,11 @@ var slot_selected:int = -1
 func set_inventory(inventory:Inventory) -> void:
 	self.inventory = inventory
 	
-	inventory.connect("slot_changed", self, "_on_inventory_changed")
+	inventory.connect("slot_changed", Callable(self, "_on_inventory_changed"))
 	
 	for i in inventory.max_slots:
 		var stack = inventory.get_item_stack(i)
-		var slot = ITEM_SLOT_SCENE.instance()
+		var slot = ITEM_SLOT_SCENE.instantiate()
 		itemGrid.add_child(slot)
 		
 		slot.set_item(i, stack.item, stack.quantity, stack.equipped)

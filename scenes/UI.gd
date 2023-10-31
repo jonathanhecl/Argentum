@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-onready var spellContainer = find_node("SpellContainerGUI")
-onready var inventoryContainer = find_node("InventoryContainerGUI")
+@onready var spellContainer = find_child("SpellContainerGUI")
+@onready var inventoryContainer = find_child("InventoryContainerGUI")
 
-onready var _main_panel = find_node("MobileMainPanel") 
-onready var _console = $RichTextLabel
+@onready var _main_panel = find_child("MobileMainPanel") 
+@onready var _console = $RichTextLabel
 
 var _protocol:GameProtocol
 var _player_data:PlayerData
@@ -14,9 +14,9 @@ func initialize(player_data:PlayerData, protocol:GameProtocol) -> void:
 	_protocol = protocol
 	_player_data = player_data
 	
-	protocol.connect("parse_data", self, "_on_parse_data")
+	protocol.connect("parse_data", Callable(self, "_on_parse_data"))
 	if !is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	
 	_main_panel.initialize(_player_data, protocol)
 	
@@ -50,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if inventoryContainer.selected_slot:
 			if _player_data.timers[PlayerData.TimersIndex.UseItemWithU].check():
 				_protocol.write_use_item(inventoryContainer.selected_slot.slot_index + 1)
-			 
+
 	if event.is_action_pressed("exit_game"):
 		_protocol.write_quit() 
 		

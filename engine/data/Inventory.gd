@@ -3,7 +3,7 @@ class_name Inventory
 
 signal slot_changed(index, old_content, new_contet)
 
-var max_slots = 30 setget _set_max_slots
+var max_slots = 30: set = _set_max_slots
 var _slots = []
 
 func _init(max_slots:int) -> void:

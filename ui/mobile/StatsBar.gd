@@ -1,13 +1,13 @@
-tool
+@tool
 extends Control
 
 var _bar_width = 0 
 
-var value:int = 1 setget set_value
-var max_value:int = 1 setget set_max_value 
+var value:int = 1: set = set_value
+var max_value:int = 1: set = set_max_value
 	
 func _ready() -> void: 
-	_bar_width = $Color.rect_size.x 
+	_bar_width = $Color.size.x 
 	
 func set_value(v:int) -> void:
 	value = v
@@ -20,4 +20,4 @@ func set_max_value(v:int) -> void:
 func _update_info():
 	$Info.text = "%d/%d" % [value, max_value] 
 	if max_value != 0:
-		$Color.rect_size.x = (value / max_value) * _bar_width
+		$Color.size.x = (value / max_value) * _bar_width

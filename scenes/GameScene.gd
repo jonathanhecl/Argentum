@@ -1,12 +1,12 @@
 extends Node
   
-export(PackedScene) var character_scene
+@export var character_scene: PackedScene
 
-onready var _main_camera = find_node("MainCamera")
-onready var _map_container = find_node("MapContainer")
+@onready var _main_camera = find_child("MainCamera")
+@onready var _map_container = find_child("MapContainer")
  
-onready var _fpsLabel = find_node("FPSLabel") 
-onready var _virtualJoystick = find_node("VirtualJoystick")
+@onready var _fpsLabel = find_child("FPSLabel") 
+@onready var _virtualJoystick = find_child("VirtualJoystick")
 
 
  
@@ -22,22 +22,21 @@ var input_map = {
 	"move_down"  : Global.Heading.Down,
 }
  
-onready var _server_packet_names:Array = GameProtocol.ServerPacketID.keys()
+@onready var _server_packet_names:Array = GameProtocol.ServerPacketID.keys()
 
 func initialize(protocol:GameProtocol):
 	_protocol = protocol
 	_player_data = PlayerData.new(Global.MAX_INVENTORY_SLOTS) 
 	
-	protocol.connect("parse_data", self, "_on_parse_data")
-	Connection.connect("disconnected", self, "_on_disconnected")  
-	 
-		 
+	protocol.connect("parse_data", Callable(self, "_on_parse_data"))
+	Connection.connect("disconnected", Callable(self, "_on_disconnected"))  
+	
 func _ready():  
-	var ui = find_node("UI")
+	var ui = find_child("UI")
 	ui.initialize(_player_data, _protocol)
 
 func _on_disconnected():
-	var scene = load("res://scenes/LobbyScene.tscn").instance()
+	var scene = load("res://scenes/LobbyScene.tscn").instantiate()
 	scene._protocol = _protocol
 	get_parent().switch_scene(scene)
 	
@@ -201,7 +200,7 @@ func _parse_block_position(data:Dictionary) -> void:
 	
 	if _map_container.current_map:
 		_map_container.current_map.set_tile_block(x, y, data.value)
-		 
+ 
 func _parse_update_player_stats(stats:Dictionary) -> void:
 	_player_data.stats.hp = stats.min_hp
 	_player_data.stats.max_hp = stats.max_hp
@@ -218,7 +217,7 @@ func _parse_update_player_stats(stats:Dictionary) -> void:
 	_player_data.stats.elv = stats.u_lvl
 	
 func _parse_create_character(data:Dictionary) -> void:
-	var character = character_scene.instance() as Character
+	var character = character_scene.instantiate() as Character
 	character.guid = data.char_id
 	
 	if _map_container.current_map:
@@ -267,7 +266,7 @@ func _parse_object_create(data:Dictionary) -> void:
 func _parse_pos_update(data:Dictionary) -> void:
 	if _map_container.current_map:
 		var main_character = _map_container.current_map.find_character(_main_character_id)
-		 
+
 		if main_character:
 			main_character.set_grid_positioon(data.x -1 , data.y - 1)
 		
@@ -388,7 +387,7 @@ func _notification(what: int) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		var viewport = get_viewport()
-		var mouse_position = (get_viewport().canvas_transform.xform_inv(event.position) / 32).ceil() as Vector2
+		var mouse_position = (get_viewport()(event.position) * .canvas_transform / 32).ceil() as Vector2
 		if event.doubleclick:
 			_protocol.write_double_click(mouse_position.x, mouse_position.y)
 			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
@@ -399,7 +398,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			if _player_data.using_skill == Global.eSkill.Magia:
 				_protocol.write_work_left_click(mouse_position.x, mouse_position.y, _player_data.using_skill)
-			 
+
 			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
 			_player_data.using_skill = 0	
 		else:

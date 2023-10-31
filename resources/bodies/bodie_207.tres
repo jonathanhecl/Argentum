@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://engine/data/AnimationData.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/1145.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/1145.png" type="Texture2D" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

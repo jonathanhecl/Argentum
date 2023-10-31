@@ -1,7 +1,7 @@
 extends TouchScreenButton
 
-onready var big_circle = $BigCircle
-onready var small_circle = $BigCircle/SmallCircle
+@onready var big_circle = $BigCircle
+@onready var small_circle = $BigCircle/SmallCircle
 
 var velocity = Vector2.ZERO 
 var _touched = false

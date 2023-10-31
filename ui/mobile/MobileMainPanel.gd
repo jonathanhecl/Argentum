@@ -1,18 +1,18 @@
 extends HBoxContainer
 
-onready var _spellContainer = find_node("SpellContainerMobile")
-onready var _inventoryContainer = find_node("InventoryContainerMobile")
-onready var _ntnSwitchPanel = find_node("BtnSwitchPanel")
+@onready var _spellContainer = find_child("SpellContainerMobile")
+@onready var _inventoryContainer = find_child("InventoryContainerMobile")
+@onready var _ntnSwitchPanel = find_child("BtnSwitchPanel")
 
 const _spellTexture = preload("res://assets/graphics/531.png")
 const _inventoryTexture = preload("res://assets/graphics/572.png")
 
-onready var _barHP = find_node("StatsBarHP")
-onready var _barMP = find_node("StatsBarMP")
-onready var _barSTA = find_node("StatsBarSTA")
-onready var _barSED = find_node("StatsBarSED")
-onready var _barHAM = find_node("StatsBarHAM")
-onready var _goldLabel = find_node("GoldLabel")
+@onready var _barHP = find_child("StatsBarHP")
+@onready var _barMP = find_child("StatsBarMP")
+@onready var _barSTA = find_child("StatsBarSTA")
+@onready var _barSED = find_child("StatsBarSED")
+@onready var _barHAM = find_child("StatsBarHAM")
+@onready var _goldLabel = find_child("GoldLabel")
 
 func initialize(player_data:PlayerData, protocol:GameProtocol) -> void:
 	_spellContainer.intialize(player_data.stats, protocol)
@@ -20,12 +20,12 @@ func initialize(player_data:PlayerData, protocol:GameProtocol) -> void:
 	
 	var stats = player_data.stats
 	
-	stats.connect("change_hp", self, "_on_change_hp")
-	stats.connect("change_mp", self, "_on_change_mp")
-	stats.connect("change_sta", self, "_on_change_sta")
-	stats.connect("change_ham", self, "_on_change_ham")
-	stats.connect("change_sed", self, "_on_change_sed")
-	stats.connect("change_gold", self, "_on_change_gold")
+	stats.connect("change_hp", Callable(self, "_on_change_hp"))
+	stats.connect("change_mp", Callable(self, "_on_change_mp"))
+	stats.connect("change_sta", Callable(self, "_on_change_sta"))
+	stats.connect("change_ham", Callable(self, "_on_change_ham"))
+	stats.connect("change_sed", Callable(self, "_on_change_sed"))
+	stats.connect("change_gold", Callable(self, "_on_change_gold"))
  
 func _on_BtnSwitchPanel_pressed() -> void:
 	if _spellContainer.visible:

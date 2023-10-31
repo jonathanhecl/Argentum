@@ -18,7 +18,7 @@ func switch_map(id:int) -> void:
 		current_map.queue_free()
 		current_map = null
 		
-	current_map = load("res://engine/Map.tscn").instance()
+	current_map = load("res://engine/Map.tscn").instantiate()
 	add_child(current_map)
 	
 	current_map.load_map(id)

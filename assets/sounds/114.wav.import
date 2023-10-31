@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/114.wav-a48fa0ed657d587ad3e58d0e0fdafeda.sample"
+type="AudioStreamWAV"
+uid="uid://dufllmnsmx3gk"
+path="res://.godot/imported/114.wav-a48fa0ed657d587ad3e58d0e0fdafeda.sample"
 
 [deps]
 
 source_file="res://assets/sounds/114.wav"
-dest_files=[ "res://.import/114.wav-a48fa0ed657d587ad3e58d0e0fdafeda.sample" ]
+dest_files=["res://.godot/imported/114.wav-a48fa0ed657d587ad3e58d0e0fdafeda.sample"]
 
 [params]
 

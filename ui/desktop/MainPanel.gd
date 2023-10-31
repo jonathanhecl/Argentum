@@ -1,22 +1,22 @@
 extends VBoxContainer
-onready var _player_hp = find_node("UserHP")
-onready var _player_mp = find_node("UserMP")
-onready var _player_sta = find_node("UserSTA")
-onready var _player_sed = find_node("UserSed")
-onready var _player_ham = find_node("UserHam")
+@onready var _player_hp = find_child("UserHP")
+@onready var _player_mp = find_child("UserMP")
+@onready var _player_sta = find_child("UserSTA")
+@onready var _player_sed = find_child("UserSed")
+@onready var _player_ham = find_child("UserHam")
 
-onready var _inventory_container = find_node("InventoryContainer")
-onready var _spell_container = find_node("SpellsContainer")
+@onready var _inventory_container = find_child("InventoryContainer")
+@onready var _spell_container = find_child("SpellsContainer")
 
 func initialize(stats:PlayerStats, inventory:Inventory, protocol:GameProtocol) -> void:
 	_inventory_container.set_inventory(inventory)
 	_spell_container.initialize(stats, protocol) 
 	   
-	stats.connect("change_hp", self, "_on_change_hp")
-	stats.connect("change_mp", self, "_on_change_mp")
-	stats.connect("change_ham", self, "_on_change_ham")
-	stats.connect("change_sed", self, "_on_change_sed")
-	stats.connect("change_sta", self, "_on_change_sta")
+	stats.connect("change_hp", Callable(self, "_on_change_hp"))
+	stats.connect("change_mp", Callable(self, "_on_change_mp"))
+	stats.connect("change_ham", Callable(self, "_on_change_ham"))
+	stats.connect("change_sed", Callable(self, "_on_change_sed"))
+	stats.connect("change_sta", Callable(self, "_on_change_sta"))
 	
 func _on_change_mp(value:int, max_value:int) -> void:
 	_player_mp.value = value

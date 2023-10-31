@@ -3,11 +3,11 @@ extends HBoxContainer
 signal pressed_previus
 signal pressed_next
  
-onready var _label = find_node("Label")
+@onready var _label = find_child("Label")
 
 func set_text(new_text:String) -> void:
 	if !is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 		
 	_label.text = new_text
 	

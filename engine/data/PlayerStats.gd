@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name PlayerStats
  
 signal change_hp(value, max_value)
@@ -15,26 +15,26 @@ signal change_elv(value)
 
 signal change_spell_slot(slot, name)
 
-var hp:int setget set_hp
-var max_hp:int setget set_max_hp
+var hp:int: set = set_hp
+var max_hp:int: set = set_max_hp
 
-var mp:int setget set_mp
-var max_mp:int setget set_max_mp
+var mp:int: set = set_mp
+var max_mp:int: set = set_max_mp
   
-var sta:int setget set_sta
-var max_sta:int setget set_max_sta
+var sta:int: set = set_sta
+var max_sta:int: set = set_max_sta
 
-var ham:int setget set_ham
-var max_ham:int setget set_max_ham
+var ham:int: set = set_ham
+var max_ham:int: set = set_max_ham
 
-var sed:int setget set_sed
-var max_sed:int setget set_max_sed
+var sed:int: set = set_sed
+var max_sed:int: set = set_max_sed
 
-var gold:int setget set_gold
+var gold:int: set = set_gold
 
-var level:int setget set_level
-var elu:int setget set_elu
-var elv:int setget set_elv
+var level:int: set = set_level
+var elu:int: set = set_elu
+var elv:int: set = set_elv
 
 var spells:Array
 

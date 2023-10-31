@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-onready var _container = find_node("GridContainer") 
+@onready var _container = find_child("GridContainer") 
 
 const SPELL_SLOT_SCENE = preload("res://ui/mobile/SpellSlotMobile.tscn")
 
@@ -11,10 +11,10 @@ func intialize(stats:PlayerStats, protocol:GameProtocol) -> void:
 	_stats = stats
 	_protocol = protocol
 	
-	_stats.connect("change_spell_slot", self, "_on_change_spell_slot")
+	_stats.connect("change_spell_slot", Callable(self, "_on_change_spell_slot"))
 	
 	for i in range(Global.MAXHECHI -1, -1, -1):
-		var slot = SPELL_SLOT_SCENE.instance()
+		var slot = SPELL_SLOT_SCENE.instantiate()
 		slot.slot_index = i
 		_container.add_child(slot)
 	

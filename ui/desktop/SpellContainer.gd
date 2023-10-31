@@ -1,13 +1,13 @@
 extends PanelContainer
 
-onready var _spells = find_node("Spells")
+@onready var _spells = find_child("Spells")
 var _protocol:GameProtocol
 var _stats:PlayerStats
 
 var _spell_index = -1
 
 func initialize(stats:PlayerStats, protocol:GameProtocol) -> void:
-	stats.connect("change_spell_slot", self, "_on_change_spell_slot")
+	stats.connect("change_spell_slot", Callable(self, "_on_change_spell_slot"))
 	_protocol = protocol
 	_stats = stats
 	

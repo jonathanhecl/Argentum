@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/cupdice.wav-2d6621ad9f4fd49ac1e6ee319661775b.sample"
+type="AudioStreamWAV"
+uid="uid://63r6rascs4iv"
+path="res://.godot/imported/cupdice.wav-2d6621ad9f4fd49ac1e6ee319661775b.sample"
 
 [deps]
 
 source_file="res://assets/sounds/cupdice.wav"
-dest_files=[ "res://.import/cupdice.wav-2d6621ad9f4fd49ac1e6ee319661775b.sample" ]
+dest_files=["res://.godot/imported/cupdice.wav-2d6621ad9f4fd49ac1e6ee319661775b.sample"]
 
 [params]
 

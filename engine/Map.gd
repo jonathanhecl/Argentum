@@ -8,8 +8,8 @@ enum TileFlags{
 }
 
 
-var _triggers := PoolIntArray()
-var _flags := PoolIntArray()
+var _triggers := PackedInt32Array()
+var _flags := PackedInt32Array()
 var _items := []
 var _characters := []
 
@@ -23,7 +23,7 @@ var _max_limit_y := 0
 
 var _visible_area:Rect2
 
-onready var entities_container = $Overlap/Entities
+@onready var entities_container = $Overlap/Entities
  
 func _init() -> void: 
 	_triggers.resize(Global.MAP_WIDTH * Global.MAP_HEIGHT)
@@ -47,7 +47,7 @@ func area_changed(x:int, y:int) -> void:
 	for character in _characters:
 		if !_visible_area.has_point(Vector2(character.grid_position_x  , character.grid_position_y )):
 			rem_chars.append(character)
-			 
+			
 		# if character.grid_position_y +1  < _min_limit_y or character.grid_position_y + 1 > _max_limit_y or character.grid_position_x + 1 < _min_limit_x or character.grid_position_x + 1 > _max_limit_x:
 				
 	for item in _items:
@@ -73,14 +73,14 @@ func add_item(x:int, y:int, grh_id:int) -> void:
 	for i in range(_items.size()):
 		if _items[i].x == x and _items[i].y == y:
 			_items[i].node.queue_free()
-			_items.remove(i)
+			_items.erase(i) # Godot 3 _items.remove(i)
 			break
 		
 	if Global.grh_data[grh_id].num_frames > 1:
 		grh_id = Global.grh_data[grh_id].frames[1]
 		
 	
-	var item = Sprite.new()
+	var item = Sprite2D.new()
 	var region = Global.grh_data[grh_id].region
 	item.texture = load("res://assets/graphics/%d.png" % Global.grh_data[grh_id].file_num)
 	item.region_enabled = true
@@ -94,7 +94,7 @@ func add_item(x:int, y:int, grh_id:int) -> void:
 		item.position = Vector2((x * 32) + 16, (y * 32) + 32)
 		item.offset = Vector2(0, -item.region_rect.size.y / 2)
 		$Overlap/Entities.add_child(item)
-		 
+		
 	_items.append({x = x, y = y, node = item})
 	
 func remove_item(x:int, y:int):
@@ -102,7 +102,7 @@ func remove_item(x:int, y:int):
 	for i in range(_items.size()):	
 		if _items[i].x == x and _items[i].y == y:
 			_items[i].node.queue_free()
-			_items.remove(i)
+			_items.erase(i) # Godot 3 _items.remove(i)
 			break
 
 func add_character(character:Character) -> void:
@@ -119,7 +119,7 @@ func remove_character_by_id(char_id:int) -> void:
 	if character:
 		_characters.erase(character)
 		character.destroy()
-		 
+		
 		
 func move_character_by_heading(char_id:int, heading:int, new_indec:Vector2) -> void:
 	var character = find_character(char_id)
@@ -129,7 +129,7 @@ func move_character_by_heading(char_id:int, heading:int, new_indec:Vector2) -> v
 		
 		var x = character.grid_position_x
 		var y = character.grid_position_y
-		 
+		
 		
 		if (new_indec.y < _min_limit_y) or (new_indec.y > _max_limit_y) or (new_indec.x < _min_limit_x) or (new_indec.x > _max_limit_x):
 		#if !_visible_area.has_point(new_indec - Vector2(1, 1)):
@@ -153,7 +153,7 @@ func set_tile_block(x:int, y:int, enable:bool) -> void:
 		_flags[x + y * Global.MAP_HEIGHT] = bits | TileFlags.Blocked
 	else:
 		_flags[x + y * Global.MAP_HEIGHT] = bits ^ TileFlags.Blocked
-	   
+
 func can_walk(x:int, y:int) -> bool:
 #Limites del mapa
 #    If x < MinXBorder Or x > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
@@ -224,7 +224,7 @@ func load_map(id:int) -> void:
 	var file = File.new()
 	var buffer = StreamPeerBuffer.new()
 	
-	var layer1 = PoolIntArray()
+	var layer1 = PackedInt32Array()
 	layer1.resize(Global.MAP_WIDTH * Global.MAP_HEIGHT) 
 	layer1.fill(0)
 	
@@ -233,7 +233,7 @@ func load_map(id:int) -> void:
 	var layer4 = []
 		
 	file.open("res://assets/maps/Mapa%d.map" % id, File.READ)
-	buffer.data_array = file.get_buffer(file.get_len())
+	buffer.data_array = file.get_buffer(file.get_length())
 
 	buffer.seek(2 + 255 + 4 + 4 + 8)
 	
@@ -299,13 +299,13 @@ func load_map(id:int) -> void:
 	)
 	var tileset = _gen_tile_set(tiles)
 
-	var floor_layer = find_node("Floor") as TileMap
+	var floor_layer = find_child("Floor") as TileMap
 	floor_layer.tile_set = tileset
 	
-	var wall_layer = find_node("Wall") as TileMap 
+	var wall_layer = find_child("Wall") as TileMap 
 	wall_layer.tile_set = tileset
 	
-	var from_layer = find_node("Front") as Node2D
+	var from_layer = find_child("Front") as Node2D
 	var from_tiles_layer = from_layer.get_node("Tiles") as TileMap
 	
 	from_tiles_layer.tile_set = tileset 
@@ -314,7 +314,7 @@ func load_map(id:int) -> void:
 		for x in range(Global.MAP_WIDTH):
 			if layer1[x + y * Global.MAP_WIDTH] > 1:
 				floor_layer.set_cell(x, y, layer1[x + y * Global.MAP_WIDTH])
-				 
+
 	for i in layer2:
 		wall_layer.set_cell(i.x, i.y, i.id)
 		
@@ -324,7 +324,7 @@ func load_map(id:int) -> void:
 			if(Global.grh_data[tile_id].num_frames > 1):
 				tile_id = Global.grh_data[tile_id].frames[1]
 			
-			var sprite = Sprite.new()
+			var sprite = Sprite2D.new()
 			sprite.region_enabled = true
 			sprite.region_rect =  Global.grh_data[tile_id].region
 			sprite.texture =  load("res://assets/graphics/%d.png" % Global.grh_data[tile_id].file_num)
@@ -343,7 +343,7 @@ func load_map(id:int) -> void:
 			if region.size == Vector2(32, 32):
 				from_tiles_layer.set_cell(i.x, i.y, tile_id)
 			else:
-				var sprite = Sprite.new()
+				var sprite = Sprite2D.new()
 				sprite.region_enabled = true 
 				sprite.region_rect = region
 				sprite.texture = load("res://assets/graphics/%d.png" % Global.grh_data[tile_id].file_num)

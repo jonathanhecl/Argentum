@@ -8,9 +8,9 @@ func _ready():
  
 func get_utf8_string(_bytes = -1):
 	var length = get_16()
-	return .get_string(length)
+	return super.get_string(length)
 
 func put_utf8_string(value):
-	var bytes = value.to_ascii()
+	var bytes = value.to_ascii_buffer()
 	put_16(bytes.size())
 	put_data(bytes)

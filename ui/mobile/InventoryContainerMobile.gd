@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-onready var _gridContainer = find_node("GridContainer")
+@onready var _gridContainer = find_child("GridContainer")
  
 var _protocol:GameProtocol
 var _player_data:PlayerData
@@ -10,13 +10,13 @@ func initialize(player_data:PlayerData, protocol:GameProtocol):
 	_player_data = player_data
 	_protocol = protocol
 	
-	player_data.inventory.connect("slot_changed", self, "_on_slot_changed")
+	player_data.inventory.connect("slot_changed", Callable(self, "_on_slot_changed"))
 
 	var i = 0
 	for slot in _gridContainer.get_children():
 		slot = slot as ItemSlot
 		slot.inventory_index = i
-		slot.connect("item_selected", self, "_on_item_selected", [slot])
+		slot.connect("item_selected", Callable(self, "_on_item_selected").bind(slot))
 		i += 1
 	
 	

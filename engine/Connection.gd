@@ -9,11 +9,11 @@ const websocket_url = "ws://%s:%d"
 var _client = WebSocketClient.new()
 
 func _ready():
-	_client.connect("connection_closed", self, "_closed")
-	_client.connect("connection_error", self, "_closed")
-	_client.connect("connection_established", self, "_connected")
+	_client.connect("connection_closed", Callable(self, "_closed"))
+	_client.connect("connection_error", Callable(self, "_closed"))
+	_client.connect("connection_established", Callable(self, "_connected"))
 
-	_client.connect("data_received", self, "_on_data")
+	_client.connect("data_received", Callable(self, "_on_data"))
   
 func _closed(was_clean = false): 
 	print("Closed, clean: ", was_clean) 

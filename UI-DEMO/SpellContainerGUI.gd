@@ -4,7 +4,7 @@ var _player_data:PlayerData
 var protocol:GameProtocol
 var spell_selected = 0
 
-onready var spellList = find_node("SpellList")
+@onready var spellList = find_child("SpellList")
  
 func initialize(player_data:PlayerData, protocol:GameProtocol) -> void:
 	self._player_data = player_data
@@ -13,7 +13,7 @@ func initialize(player_data:PlayerData, protocol:GameProtocol) -> void:
 	for i in player_data.stats.spells:
 		spellList.add_item(i)
 		
-	player_data.stats.connect("change_spell_slot", self, "_on_change_spell_slot")
+	player_data.stats.connect("change_spell_slot", Callable(self, "_on_change_spell_slot"))
 
 func _on_BtnCast_pressed() -> void:
 	if spellList.get_item_text(spell_selected) != "(None)":

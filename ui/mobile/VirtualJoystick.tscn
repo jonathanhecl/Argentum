@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://ui/mobile/ball.png" type="Texture" id=1]
-[ext_resource path="res://ui/mobile/background.png" type="Texture" id=2]
+[ext_resource path="res://ui/mobile/ball.png" type="Texture2D" id=1]
+[ext_resource path="res://ui/mobile/background.png" type="Texture2D" id=2]
 [ext_resource path="res://ui/mobile/VirtualJoystick.gd" type="Script" id=3]
 
 [node name="VirtualJoystick" type="TouchScreenButton"]
@@ -12,12 +12,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="BigCircle" type="Sprite" parent="."]
+[node name="BigCircle" type="Sprite2D" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.588235 )
 texture = ExtResource( 2 )
 
-[node name="SmallCircle" type="Sprite" parent="BigCircle"]
+[node name="SmallCircle" type="Sprite2D" parent="BigCircle"]
 visible = false
 texture = ExtResource( 1 )
 

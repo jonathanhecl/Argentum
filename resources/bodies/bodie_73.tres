@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=43 format=2]
 
 [ext_resource path="res://engine/data/AnimationData.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/367.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/366.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/365.png" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/368.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/367.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/graphics/366.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/graphics/365.png" type="Texture2D" id=4]
+[ext_resource path="res://assets/graphics/368.png" type="Texture2D" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )

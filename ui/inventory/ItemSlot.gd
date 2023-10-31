@@ -3,15 +3,15 @@ class_name ItemSlot
 
 signal item_selected
 
-onready var quantityLabel = find_node("QuantityLabel")
-onready var equippedLabel = find_node("EquippedLabel")
-onready var iconTexture = find_node("IconTexture")
+@onready var quantityLabel = find_child("QuantityLabel")
+@onready var equippedLabel = find_child("EquippedLabel")
+@onready var iconTexture = find_child("IconTexture")
 
-export (int, -1, 1000, 1) var inventory_index:int = -1
+@export (int, -1, 1000, 1) var inventory_index:int = -1
 
-var item:Item = null setget _set_item
-var quantity:int = 0 setget _set_quantity
-var equipped:bool = false setget _set_equipped
+var item:Item = null: set = _set_item
+var quantity:int = 0: set = _set_quantity
+var equipped:bool = false: set = _set_equipped
  
 
 func set_item(index:int, item:Item, quantity:int, equipped:bool) -> void:
@@ -28,7 +28,7 @@ func _set_item(new_item:Item) -> void:
 	item = new_item
 	
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 		
 	if not item:
 		iconTexture.texture = null
@@ -39,7 +39,7 @@ func _set_quantity(new_quantity:int) -> void:
 	quantity = new_quantity
 
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	
 	if quantity <= 1:
 		quantityLabel.visible = false
@@ -51,7 +51,7 @@ func _set_equipped(new_equipped:bool) -> void:
 	equipped = new_equipped
 	
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	
 	if equipped:
 		equippedLabel.visible = true
