@@ -3,11 +3,11 @@ class_name Character
 
 @onready var char_name = $Name
 
-@onready var _body_sprite = find_child("Body")
-@onready var _head_sprite = find_child("Head")
-@onready var _helmet_sprite = find_child("Helmet")
-@onready var _weapon_sprite = find_child("Weapon")
-@onready var _shield_sprite = find_child("Shield")
+@onready var _body_sprite: AnimatedSprite2D = find_child("Body")
+@onready var _head_sprite: AnimatedSprite2D  = find_child("Head")
+@onready var _helmet_sprite: AnimatedSprite2D  = find_child("Helmet")
+@onready var _weapon_sprite: AnimatedSprite2D  = find_child("Weapon")
+@onready var _shield_sprite: AnimatedSprite2D  = find_child("Shield")
 
 @onready var _debug = find_child("Debug")
 
@@ -157,17 +157,16 @@ func _set_animation(node:AnimatedSprite2D, resource_path:String, is_body:bool = 
 		node.visible = false
 	else:
 		var resource = load(resource_path)
-		
+
 		node.visible = true
-		node.frames = resource.animation
-		
-		var texture = resource.animation.get_frame("idle_down", 0)
+		node.frames = resource.animation 
+
+		var texture = resource.animation.get_frame_texture("idle_down", 0)
 		node.offset.y = -texture.get_height() / 2
-		
+
 		if is_body:
 			_head_sprite.position.y = (resource.head_offset_y) 
 			_helmet_sprite.position.y = (resource.head_offset_y) 
-			
 
 func talk(message:String, color:Color = Color.WHITE) -> void:
 	$Dialog.text = message
@@ -180,38 +179,37 @@ func _on_RemoveDialog_timeout() -> void:
 
 func add_effect(effectId:int, loops:int) -> void:
 	if effectId == 0 : return
-	
+
 	var resource = load("res://resources/fxs/effect_%d.tres" % effectId) as SpriteFrames
 	if !resource:
 		return
-	
-	var texture = resource.get_frame("default", 1)
+
+	var texture = resource.get_frame_texture("default", 1)
 	var offset_y = texture.get_height() / 2
-	
+
 	if resource:
 		var fx = FXS_SCENE.instantiate()
 		$Effects.add_child(fx)
-		
+
 		if texture.get_width() != 128:
 			fx.position.y -= offset_y
 		else:
 			fx.position.y -= 16
 
-		fx.intialize(resource)	
+		fx.intialize(resource)
 	
 func play_animation(animation_name:String) -> void:	
-	if _body_sprite.frames:
+	if _body_sprite.sprite_frames:
 		_body_sprite.play(animation_name)
-	
-	if _weapon_sprite.frames:
+
+	if _weapon_sprite.sprite_frames:
 		_weapon_sprite.play(animation_name)
-	
-	if _shield_sprite.frames:
+
+	if _shield_sprite.sprite_frames:
 		_shield_sprite.play(animation_name)
-	
-	if _head_sprite.frames:
+
+	if _head_sprite.sprite_frames:
 		_head_sprite.play(animation_name.replace("walk", "idle"))
-	
-	if _helmet_sprite.frames:
+
+	if _helmet_sprite.sprite_frames:
 		_helmet_sprite.play(animation_name.replace("walk", "idle"))
-	

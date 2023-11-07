@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ce2b7ta1mef02"]
 
 [ext_resource type="Script" path="res://scenes/GameScene.gd" id="1"]
-[ext_resource type="PackedScene" path="res://entities/character/Character.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://k7gwyvd0gtoe" path="res://entities/character/Character.tscn" id="2"]
 [ext_resource type="Script" path="res://scenes/MapContainer.gd" id="3"]
 [ext_resource type="Script" path="res://scenes/UI.gd" id="4"]
 [ext_resource type="Script" path="res://scenes/WorldContainer.gd" id="5"]
@@ -32,7 +32,7 @@ script = ExtResource("5")
 [node name="World" type="SubViewport" parent="UI/VBoxContainer/WorldContainer"]
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(2, 500)
+size = Vector2i(1280, 536)
 render_target_update_mode = 4
 
 [node name="MainCamera" type="Camera2D" parent="UI/VBoxContainer/WorldContainer/World"]

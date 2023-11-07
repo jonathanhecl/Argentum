@@ -99,6 +99,12 @@ offset_bottom = -300.0
 theme = ExtResource("4")
 text = "Nombre"
 
+[node name="LabelError" type="Label" parent="."]
+offset_left = 770.0
+offset_top = 196.0
+offset_right = 810.0
+offset_bottom = 219.0
+
 [connection signal="pressed" from="BtnExit" to="." method="_on_BtnExit_pressed"]
 [connection signal="pressed" from="BtnConnect" to="." method="_on_BtnConnect_pressed"]
 [connection signal="pressed" from="BtnCreate" to="." method="_on_BtnCreate_pressed"]

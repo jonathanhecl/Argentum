@@ -50,7 +50,7 @@ func _on_client_connected():
 		_protocol.write_login_existing_char(user_name.text, user_password.text)
 		_protocol.flush_data()
 
-	print("conexion establecida")
+	print("conexion establecida ", current_state)
 
 func _on_client_disconnected():
 	current_state = State.None
@@ -62,4 +62,5 @@ func _on_client_logged():
 	get_parent().switch_scene(scene)
 
 func _on_error_message(message:String):
+	$LabelError.text = message
 	print(message) 

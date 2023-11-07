@@ -7,7 +7,7 @@ signal item_selected
 @onready var equippedLabel = find_child("EquippedLabel")
 @onready var iconTexture = find_child("IconTexture")
 
-@export (int, -1, 1000, 1) var inventory_index:int = -1
+@export_range(-1, 1000, 1) var inventory_index: int = -1
 
 var item:Item = null: set = _set_item
 var quantity:int = 0: set = _set_quantity
@@ -34,7 +34,7 @@ func _set_item(new_item:Item) -> void:
 		iconTexture.texture = null
 	else:
 		iconTexture.texture = item.texture
-	 
+		
 func _set_quantity(new_quantity:int) -> void:
 	quantity = new_quantity
 
@@ -45,7 +45,7 @@ func _set_quantity(new_quantity:int) -> void:
 		quantityLabel.visible = false
 	else:
 		quantityLabel.visible = true
-		quantityLabel.text = String(quantity)
+		quantityLabel.text = str(quantity)
 
 func _set_equipped(new_equipped:bool) -> void:
 	equipped = new_equipped

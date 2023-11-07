@@ -818,8 +818,8 @@ func _handle_npc_kill_user(_buff):
 ############################################### INICIO DE WRITERS  ##########################################################################
 func write_login_existing_char(user_name: String, user_password: String):
 	auxiliarBuffer.put_u8(ClientPacketID.LoginExistingChar)
-	auxiliarBuffer.get_utf8_string_argentum(user_name)
-	auxiliarBuffer.get_utf8_string_argentum(user_password)
+	auxiliarBuffer.put_utf8_string_argentum(user_name)
+	auxiliarBuffer.put_utf8_string_argentum(user_password)
 
 	auxiliarBuffer.put_u8(0)
 	auxiliarBuffer.put_u8(12)
@@ -827,6 +827,8 @@ func write_login_existing_char(user_name: String, user_password: String):
 
 	for _i in range(7):
 		auxiliarBuffer.put_16(0)
+		
+	print(auxiliarBuffer.to_string())
 
 
 func write_login_new_char(
@@ -839,8 +841,8 @@ func write_login_new_char(
 	user_home: int
 ):
 	auxiliarBuffer.put_u8(ClientPacketID.LoginNewChar)
-	auxiliarBuffer.get_utf8_string_argentum(user_name)
-	auxiliarBuffer.get_utf8_string_argentum(user_password)
+	auxiliarBuffer.put_utf8_string_argentum(user_name)
+	auxiliarBuffer.put_utf8_string_argentum(user_password)
 
 	auxiliarBuffer.put_u8(0)
 	auxiliarBuffer.put_u8(12)
@@ -853,7 +855,7 @@ func write_login_new_char(
 	auxiliarBuffer.put_u8(user_gender)
 	auxiliarBuffer.put_u8(user_class)
 
-	auxiliarBuffer.get_utf8_string_argentum(user_email)
+	auxiliarBuffer.put_utf8_string_argentum(user_email)
 	auxiliarBuffer.put_u8(user_home)
 
 
@@ -928,7 +930,7 @@ func write_equip_item(slot: int):
 
 func write_talk(chat: String):
 	auxiliarBuffer.put_u8(ClientPacketID.Talk)
-	auxiliarBuffer.get_utf8_string_argentum(chat)
+	auxiliarBuffer.put_utf8_string_argentum(chat)
 
 
 func write_quit():

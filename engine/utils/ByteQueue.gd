@@ -8,9 +8,12 @@ func _ready():
  
 func get_utf8_string_argentum(_bytes = -1):
 	var length = get_16()
-	return super.get_string(length)
+	var buff = super.get_string(length)
+	print("get_utf8_string_argentum", buff)
+	return buff
 
 func put_utf8_string_argentum(value):
+	print("put_utf8_string_argentum", value)
 	var bytes = value.to_ascii_buffer()
 	put_16(bytes.size())
 	put_data(bytes)

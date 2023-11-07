@@ -37,13 +37,13 @@ func _ready():
 
 func _input(event):
 	if event.is_action("move_up"):
-		$Camera2D.position.y -= 10
+		$Camera2D.position.y -= 50
 	elif event.is_action("move_down"):
-		$Camera2D.position.y += 10
+		$Camera2D.position.y += 50
 	elif event.is_action("move_left"):
-		$Camera2D.position.x -= 10
+		$Camera2D.position.x -= 50
 	elif event.is_action("move_right"):
-		$Camera2D.position.x += 10
+		$Camera2D.position.x += 50
 	
 func area_changed(x:int, y:int) -> void:
 	_min_limit_x = (int(x / 9) - 1) * 9
@@ -86,7 +86,7 @@ func add_item(x:int, y:int, grh_id:int) -> void:
 	for i in range(_items.size()):
 		if _items[i].x == x and _items[i].y == y:
 			_items[i].node.queue_free()
-			_items.erase(i) # Godot 3 _items.remove(i)
+			_items.remove_at(i) # Godot 3 _items.remove(i)
 			break
 		
 	if Global.grh_data[grh_id].num_frames > 1:
@@ -115,7 +115,7 @@ func remove_item(x:int, y:int):
 	for i in range(_items.size()):	
 		if _items[i].x == x and _items[i].y == y:
 			_items[i].node.queue_free()
-			_items.erase(i) # Godot 3 _items.remove(i)
+			_items.remove_at(i) # Godot 3 _items.remove(i)
 			break
 
 func add_character(character:Character) -> void:
@@ -215,8 +215,8 @@ func _get_map_tiles(data:Dictionary) -> Array:
 			
 	return tiles
 	
-func _gen_tile_set(tiles:Array) -> TileSet:
-	var tile_set = TileSet.new()
+func _gen_tile_set(tiles:Array) -> TileSetAtlasSource:
+	var tile_set = TileSetAtlasSource.new()
 	
 	for tile in tiles:
 		if tile <= Global.grh_data.size():

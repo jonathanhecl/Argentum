@@ -35,7 +35,7 @@ func _on_item_selected(itemslot:ItemSlot) -> void:
 			_protocol.write_use_item(index)
 		elif item.is_equippable():
 			_protocol.write_equip_item(index)
-		 
+		
 func _on_BtnAttack_pressed() -> void:
 	_protocol.write_attack()
  

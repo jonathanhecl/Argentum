@@ -1,5 +1,5 @@
 extends Node
-  
+
 @export var character_scene: PackedScene
 
 @onready var _main_camera = find_child("MainCamera")
@@ -7,8 +7,6 @@ extends Node
  
 @onready var _fpsLabel = find_child("FPSLabel") 
 @onready var _virtualJoystick = find_child("VirtualJoystick")
-
-
  
 var _protocol:GameProtocol 
 var _player_data:PlayerData
@@ -219,13 +217,13 @@ func _parse_update_player_stats(stats:Dictionary) -> void:
 func _parse_create_character(data:Dictionary) -> void:
 	var character = character_scene.instantiate() as Character
 	character.guid = data.char_id
-	
+
 	if _map_container.current_map:
 		_map_container.current_map.add_character(character)
-	
+
 	character.set_grid_positioon(data.x - 1, data.y - 1)
 	character.set_character_name(data.name)
-	
+
 	character.heading = data.heading
 	character.weapon = data.weapon
 	character.shield = data.shield
@@ -381,28 +379,29 @@ func get_input_heading() -> int:
 	return input
 	
 func _notification(what: int) -> void:
-	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
-		_protocol.write_quit()
+#	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+#		_protocol.write_quit()
+	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		var viewport = get_viewport()
-		var mouse_position = (get_viewport()(event.position) * .canvas_transform / 32).ceil() as Vector2
-		if event.doubleclick:
-			_protocol.write_double_click(mouse_position.x, mouse_position.y)
-			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
-			_player_data.using_skill = 0	
-			return 
-		
-		if _player_data.using_skill != 0 : 
-			
-			if _player_data.using_skill == Global.eSkill.Magia:
-				_protocol.write_work_left_click(mouse_position.x, mouse_position.y, _player_data.using_skill)
-
-			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
-			_player_data.using_skill = 0	
-		else:
-			pass 
+#		var mouse_position = (get_viewport()(event.position) * .canvas_transform / 32).ceil() as Vector2
+#		if event.doubleclick:
+#			_protocol.write_double_click(mouse_position.x, mouse_position.y)
+#			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
+#			_player_data.using_skill = 0	
+#			return 
+#
+#		if _player_data.using_skill != 0 : 
+#
+#			if _player_data.using_skill == Global.eSkill.Magia:
+#				_protocol.write_work_left_click(mouse_position.x, mouse_position.y, _player_data.using_skill)
+#
+#			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
+#			_player_data.using_skill = 0	
+#		else:
+#			pass 
 
 
 func _on_BtnToggleCombat_pressed() -> void: 
