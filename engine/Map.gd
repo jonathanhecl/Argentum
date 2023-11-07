@@ -215,8 +215,8 @@ func _get_map_tiles(data:Dictionary) -> Array:
 			
 	return tiles
 	
-func _gen_tile_set(tiles:Array) -> TileSetAtlasSource:
-	var tile_set = TileSetAtlasSource.new()
+func _gen_tile_set(tiles:Array) -> TileSet:
+	var tile_set = TileSet.new()
 	
 	for tile in tiles:
 		if tile <= Global.grh_data.size():
@@ -230,8 +230,12 @@ func _gen_tile_set(tiles:Array) -> TileSetAtlasSource:
 			# Godot 3
 			# tile_set.create_tile(tile)
 			# tile_set.tile_set_region(tile, source_rect)
-			# tile_set.tile_set_texture(tile, texture) 
-				
+			# tile_set.tile_set_texture(tile, texture)
+
+			var tile_source = TileSetAtlasSource.new()
+			tile_source.texture_region_size = source_rect.size
+			tile_source.texture = texture
+			tile_set.add_source(tile_source, tile)
 	return tile_set
 
 func load_map(id:int) -> void:
