@@ -1,13 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwjq8ar6hxiyl"]
+[gd_scene load_steps=2 format=3 uid="uid://bwjq8ar6hxiyl"]
 
 [ext_resource type="Script" path="res://engine/Map.gd" id="1"]
-[ext_resource type="Script" path="res://engine/ArgentumTileMap.gd" id="2_cnj3u"]
 
 [node name="Map" type="Node2D" node_paths=PackedStringArray("ground", "wall", "front_tiles")]
 script = ExtResource("1")
-ground = NodePath("Ground")
-wall = NodePath("Wall")
-front_tiles = NodePath("Front/Tiles")
 
 [node name="Ground" type="Node2D" parent="."]
 script = ExtResource("2_cnj3u")

@@ -7,9 +7,6 @@ enum TileFlags{
 	Water = 1 << 1
 }
 
-@export var ground:ArgentumTileMap
-@export var wall:ArgentumTileMap
-@export var front_tiles:ArgentumTileMap
 
 var _triggers := PackedInt32Array()
 var _flags := PackedInt32Array()
@@ -26,16 +23,6 @@ var _max_limit_y := 0
 
 var _visible_area:Rect2
 
-class TileSpriteData:
-	var x:int
-	var y:int
-	var id:int
-	
-	func _init(x:int, y:int, id:int):
-		self.x = x
-		self.y = y
-		self.id = id
-
 @onready var entities_container = $Overlap/Entities
  
 func _init() -> void: 
@@ -46,8 +33,7 @@ func _init() -> void:
 	_flags.fill(0) 
 	
 func _ready():
-	#load_map(34)
-	pass
+	load_map(34)
 
 func _input(event):
 	if event.is_action("move_up"):
@@ -260,46 +246,62 @@ func load_map(id:int) -> void:
 	var buffer = StreamPeerBuffer.new()
 	
 	var layer1 = PackedInt32Array()
-	var layer2 = PackedInt32Array()
-	var layer3 = []
-	var layer4 = []
-	
-	layer1.resize(ArgentumTileMap.MAP_WIDTH * ArgentumTileMap.MAP_HEIGHT)
+	layer1.resize(Global.MAP_WIDTH * Global.MAP_HEIGHT) 
 	layer1.fill(0)
 	
-	layer2.resize(ArgentumTileMap.MAP_WIDTH * ArgentumTileMap.MAP_HEIGHT)
-	layer2.fill(0)
+	var layer2 = []
+	var layer3 = []
+	var layer4 = []
+		
 	
-	buffer.data_array = file.get_buffer(file.get_length()) 
+	buffer.data_array = file.get_buffer(file.get_length())
+
 	buffer.seek(2 + 255 + 4 + 4 + 8)
 	
 	var agua_grh :=0
 	var temp_layer := 0
 	
-	for y in range(ArgentumTileMap.MAP_HEIGHT):
-		for x in range(ArgentumTileMap.MAP_WIDTH):
+	for y in range(Global.MAP_HEIGHT):
+		for x in range(Global.MAP_WIDTH):
 			var flags = buffer.get_u8()
-			var tile_index = x + y * ArgentumTileMap.MAP_WIDTH
+			
 			
 			if flags & 1:
-				_flags[ x + y * ArgentumTileMap.MAP_WIDTH] |= TileFlags.Blocked
+				_flags[ x + y * Global.MAP_WIDTH] |= TileFlags.Blocked
 			
 			#set_tile_blocked(x, y, flags & 1)
 			
-			layer1[tile_index] = buffer.get_16()
+			layer1[x + y * Global.MAP_WIDTH] = buffer.get_16()
 
 			if flags & 2:
-				layer2[tile_index] = buffer.get_16() 
+				temp_layer = buffer.get_16()
+				
+				layer2.append({
+					x =  x,
+					y =  y,
+					id =  temp_layer
+				})
+			else:
+				temp_layer = 0
 				
 			if flags & 4:
-				layer3.append(TileSpriteData.new(x, y, buffer.get_16())) 
+				layer3.append({
+					x = x,
+					y = y,
+					id = buffer.get_16()
+				})
 				
 			if flags & 8:
-				layer4.append(TileSpriteData.new(x, y, buffer.get_16()))  
+				layer4.append({
+					x = x,
+					y =  y,
+					id = buffer.get_16()
+				})
 				
 			if flags & 16:
 				_triggers[x + y * Global.MAP_HEIGHT] = buffer.get_16()
-
+				
+				
 			agua_grh = layer1[x + y * Global.MAP_WIDTH]
 			
 			#parche para el agua. muy feo...
@@ -308,10 +310,37 @@ func load_map(id:int) -> void:
 				(agua_grh >= 13547 && agua_grh <= 13562)) and (temp_layer == 0):
 					_flags[x + y * Global.MAP_WIDTH] = TileFlags.Water | _flags[x + y * Global.MAP_WIDTH]
 				
-				
-	ground.setup(layer1)
-	wall.setup(layer2)
+	var tiles = _get_map_tiles(
+		{
+			layer1 = layer1,
+			layer2 = layer2,
+			layer3 = layer3,
+			layer4 = layer4
+		}
+	)
+	var tileset = _gen_tile_set(tiles)
+
+	var floor_layer = find_child("Floor") as TileMap
+	floor_layer.tile_set = tileset
 	
+	var wall_layer = find_child("Wall") as TileMap 
+	wall_layer.tile_set = tileset
+	
+	var from_layer = find_child("Front") as Node2D
+	var from_tiles_layer = from_layer.get_node("Tiles") as TileMap
+	
+	from_tiles_layer.tile_set = tileset 
+	
+	for y in range(Global.MAP_HEIGHT):
+		for x in range(Global.MAP_WIDTH):
+			if layer1[x + y * Global.MAP_WIDTH] > 1:
+				# Godot 3 floor_layer.set_cell(x, y, layer1[x + y * Global.MAP_WIDTH])
+				floor_layer.set_cell(layer1[x + y * Global.MAP_WIDTH], Vector2i(x,y))
+
+	for i in layer2:
+		# Godot 3 wall_layer.set_cell(i.x, i.y, i.id)
+		wall_layer.set_cell(i.id, Vector2i(i.x,i.y))
+		
 	for i in layer3:
 		if(i.id > 0):
 			var tile_id = i.id
@@ -332,10 +361,11 @@ func load_map(id:int) -> void:
 			var tile_id = i.id
 			if(Global.grh_data[tile_id].num_frames > 1):
 				tile_id = Global.grh_data[tile_id].frames[1]
-
+			
 			var region = Global.grh_data[tile_id].region
 			if region.size == Vector2(32, 32):
-				front_tiles.set_tile(i.x, i.y, i.id) 
+				# Godot 3 from_tiles_layer.set_cell(i.x, i.y, tile_id)
+				from_tiles_layer.set_cell(tile_id, Vector2i(i.x, i.y))
 			else:
 				var sprite = Sprite2D.new()
 				sprite.region_enabled = true 
@@ -343,4 +373,5 @@ func load_map(id:int) -> void:
 				sprite.texture = load("res://assets/graphics/%d.png" % Global.grh_data[tile_id].file_num)
 				sprite.position = Vector2((i.x * 32) + 16, (i.y * 32) + 32)
 				sprite.offset = Vector2(0, -sprite.region_rect.size.y / 2)
-				$Front.add_child(sprite) 
+				from_layer.add_child(sprite)
+

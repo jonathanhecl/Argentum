@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var _main_character_id := 0
 var current_map:Map = null
 
