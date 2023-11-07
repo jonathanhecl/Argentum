@@ -386,22 +386,25 @@ func _notification(what: int) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		var viewport = get_viewport()
-#		var mouse_position = (get_viewport()(event.position) * .canvas_transform / 32).ceil() as Vector2
-#		if event.doubleclick:
-#			_protocol.write_double_click(mouse_position.x, mouse_position.y)
-#			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
-#			_player_data.using_skill = 0	
-#			return 
-#
-#		if _player_data.using_skill != 0 : 
-#
-#			if _player_data.using_skill == Global.eSkill.Magia:
-#				_protocol.write_work_left_click(mouse_position.x, mouse_position.y, _player_data.using_skill)
-#
-#			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
-#			_player_data.using_skill = 0	
-#		else:
-#			pass 
+		#Godot 3 var mouse_position = (get_viewport().canvas_transform.xform_inv(event.position) / 32).ceil() as Vector2
+		#var mouse_position = (get_viewport()(event.position) * .canvas_transform / 32).ceil() as Vector2
+		var mouse_position = get_viewport().canvas_transform.basis_xform_inv(event.position).ceil() as Vector2
+		print(mouse_position)
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			_protocol.write_double_click(mouse_position.x, mouse_position.y)
+			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
+			_player_data.using_skill = 0	
+			return 
+
+		if _player_data.using_skill != 0 : 
+
+			if _player_data.using_skill == Global.eSkill.Magia:
+				_protocol.write_work_left_click(mouse_position.x, mouse_position.y, _player_data.using_skill)
+
+			Input.set_default_cursor_shape(Input.CURSOR_ARROW) 
+			_player_data.using_skill = 0	
+		else:
+			pass 
 
 
 func _on_BtnToggleCombat_pressed() -> void: 
