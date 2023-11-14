@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://264boseoei88"]
 
 [ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/CreateCharacter.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://lhnk4gaokq4c" path="res://scenes/CreateCharacter.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ce2b7ta1mef02" path="res://scenes/GameScene.tscn" id="3"]
 [ext_resource type="Theme" path="res://assets/theme.theme" id="4"]
 [ext_resource type="Texture2D" uid="uid://d0jtkawhllht7" path="res://assets/ui/background_lobby.png" id="5_8p1p6"]
@@ -21,7 +21,6 @@ create_scene = ExtResource("2")
 game_scene = ExtResource("3")
 
 [node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(640.25, 359.75)
 scale = Vector2(1.11241, 0.943359)
 texture = ExtResource("5_8p1p6")

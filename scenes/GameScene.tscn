@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scenes/MapContainer.gd" id="3"]
 [ext_resource type="Script" path="res://scenes/UI.gd" id="4"]
 [ext_resource type="Script" path="res://scenes/WorldContainer.gd" id="5"]
-[ext_resource type="PackedScene" path="res://ui/mobile/VirtualJoystick.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cpc0gi8ulup2r" path="res://ui/mobile/VirtualJoystick.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://ui/mobile/MobileMainPanel.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://q1vhnw060th1" path="res://ui/mobile/background.png" id="8_tumax"]
 [ext_resource type="Texture2D" uid="uid://db2bmi25qh8oe" path="res://assets/ui/modocombate.png" id="9"]
@@ -32,7 +32,7 @@ script = ExtResource("5")
 [node name="World" type="SubViewport" parent="UI/VBoxContainer/WorldContainer"]
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(2, 500)
+size = Vector2i(1280, 536)
 render_target_update_mode = 4
 
 [node name="MainCamera" type="Camera2D" parent="UI/VBoxContainer/WorldContainer/World"]

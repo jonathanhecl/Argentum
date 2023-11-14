@@ -11,7 +11,7 @@ extends VBoxContainer
 func initialize(stats:PlayerStats, inventory:Inventory, protocol:GameProtocol) -> void:
 	_inventory_container.set_inventory(inventory)
 	_spell_container.initialize(stats, protocol) 
-	   
+	
 	stats.connect("change_hp", Callable(self, "_on_change_hp"))
 	stats.connect("change_mp", Callable(self, "_on_change_mp"))
 	stats.connect("change_ham", Callable(self, "_on_change_ham"))

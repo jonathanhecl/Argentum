@@ -45,19 +45,19 @@ func _init() -> void:
 	_flags.resize(Global.MAP_WIDTH * Global.MAP_HEIGHT)
 	_flags.fill(0) 
 	
-func _ready():
-	#load_map(34)
-	pass
-
-func _input(event):
-	if event.is_action("move_up"):
-		$Camera2D.position.y -= 50
-	elif event.is_action("move_down"):
-		$Camera2D.position.y += 50
-	elif event.is_action("move_left"):
-		$Camera2D.position.x -= 50
-	elif event.is_action("move_right"):
-		$Camera2D.position.x += 50
+#func _ready():
+#	load_map(34)
+#	pass
+#
+#func _input(event):
+#	if event.is_action("move_up"):
+#		$Camera2D.position.y -= 50
+#	elif event.is_action("move_down"):
+#		$Camera2D.position.y += 50
+#	elif event.is_action("move_left"):
+#		$Camera2D.position.x -= 50
+#	elif event.is_action("move_right"):
+#		$Camera2D.position.x += 50
 	
 func area_changed(x:int, y:int) -> void:
 	_min_limit_x = (int(x / 9) - 1) * 9

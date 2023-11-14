@@ -24,15 +24,7 @@ func _ready():
 
 	_protocol.connect("logged", Callable(self, "_on_client_logged"))
 	_protocol.connect("error_message", Callable(self, "_on_error_message")) 
-	
-	$Background.modulate = Color(0.2, 0.2, 0.2, 1)
-	
-func _process(delta):
-	if randf() > 0.998:
-		$Background.modulate = Color(0.9, 0.8, 0.8, 1)
-		await get_tree().create_timer(0.1).timeout
-		$Background.modulate = Color(0.2, 0.2, 0.2, 1)
-	
+
 	
 func _on_BtnExit_pressed():
 	get_tree().quit()

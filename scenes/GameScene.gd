@@ -8,9 +8,9 @@ extends Node
 @onready var _fpsLabel = find_child("FPSLabel") 
 @onready var _virtualJoystick = find_child("VirtualJoystick")
  
-var _protocol:GameProtocol 
+var _protocol:GameProtocol
 var _player_data:PlayerData
-  
+
 var _main_character_id := 0
 
 var input_map = {
@@ -19,7 +19,7 @@ var input_map = {
 	"move_up"    : Global.Heading.Up,
 	"move_down"  : Global.Heading.Down,
 }
- 
+
 @onready var _server_packet_names:Array = GameProtocol.ServerPacketID.keys()
 
 func initialize(protocol:GameProtocol):
@@ -29,10 +29,21 @@ func initialize(protocol:GameProtocol):
 	protocol.connect("parse_data", Callable(self, "_on_parse_data"))
 	Connection.connect("disconnected", Callable(self, "_on_disconnected"))  
 	
-func _ready():  
+func _ready():
 	var ui = find_child("UI")
 	ui.initialize(_player_data, _protocol)
 
+func _input(event):
+	if event.is_action_pressed("move_up"):
+		return _get_movement_heading(Vector2.UP)
+	if event.is_action_pressed("move_down"):
+		return _get_movement_heading(Vector2.DOWN)
+	if event.is_action_pressed("move_left"):
+		return _get_movement_heading(Vector2.LEFT)
+	if event.is_action_pressed("move_right"):
+		return _get_movement_heading(Vector2.RIGHT)
+	print("tecla ", event.to_string())
+		
 func _on_disconnected():
 	var scene = load("res://scenes/LobbyScene.tscn").instantiate()
 	scene._protocol = _protocol
