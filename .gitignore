@@ -5,6 +5,7 @@
 export/
 export.cfg
 export_presets.cfg
+server/
 
 # Mono-specific ignores
 .mono/
