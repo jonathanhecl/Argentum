@@ -13,7 +13,7 @@ config_version=5
 config/name="Argentum"
 run/main_scene="res://Main.tscn"
 config/quit_on_go_back=false
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]
