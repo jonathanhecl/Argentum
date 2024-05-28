@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://g1sgt5grtyrm"]
 
-[ext_resource type="PackedScene" path="res://ui/inventory/InventoryContainer.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://r3nqi7rr447g" path="res://ui/inventory/InventoryContainer.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://o0lia58mrfw6" path="res://ui/desktop/SpellContainer.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dco6xsneqsqxh" path="res://assets/inventory/33.png" id="3"]
 [ext_resource type="Theme" path="res://assets/theme.theme" id="4"]

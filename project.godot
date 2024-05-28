@@ -21,13 +21,19 @@ config/icon="res://icon.png"
 Global="*res://engine/Global.gd"
 Connection="*res://engine/Connection.gd"
 AudioManager="*res://engine/AudioManager.gd"
+Configuration="*res://engine/Configuration.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/resizable=false
 window/stretch/mode="2d"
-window/handheld/orientation="reverse_landscape"
+window/handheld/orientation=1
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [global]
 
@@ -142,6 +148,9 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true

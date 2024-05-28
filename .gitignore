@@ -6,6 +6,9 @@ export/
 export.cfg
 export_presets.cfg
 server/
+*.exe
+*.apk
+*.idsig
 
 # Mono-specific ignores
 .mono/

@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://buphpinlgi60c"]
+
+[ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1_2nqx2"]
+[ext_resource type="PackedScene" path="res://ui/mobile/InventoryContainerMobile.tscn" id="2_c8jww"]
+[ext_resource type="PackedScene" uid="uid://ce2b7ta1mef02" path="res://scenes/GameSceneMobile.tscn" id="3_emslq"]
+[ext_resource type="PackedScene" uid="uid://csx6jcm4c5oxu" path="res://scenes/GameSceneDesktop.tscn" id="4_j872d"]
+[ext_resource type="Texture2D" uid="uid://d0jtkawhllht7" path="res://assets/ui/background_lobby.png" id="4_ji7ds"]
+[ext_resource type="Theme" path="res://assets/theme.theme" id="5_uqnbi"]
+[ext_resource type="FontFile" uid="uid://tlecdggw2uka" path="res://assets/fonts/source_code_pro/SourceCodePro-Black.ttf" id="6_06j1o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_newie"]
+line_spacing = 4.0
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xkqdl"]
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="LobbyScene" type="Node" node_paths=PackedStringArray("server_ip", "server_port", "music_active")]
+script = ExtResource("1_2nqx2")
+create_scene_mobile = ExtResource("2_c8jww")
+game_scene_mobile = ExtResource("3_emslq")
+game_scene_desktop = ExtResource("4_j872d")
+server_ip = NodePath("VBoxContainer/Servidor")
+server_port = NodePath("VBoxContainer/Puerto")
+music_active = NodePath("VBoxContainer/CheckMusicOn")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640.25, 359.75)
+scale = Vector2(1.11241, 0.943359)
+texture = ExtResource("4_ji7ds")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelUserName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Nombre"
+label_settings = SubResource("LabelSettings_newie")
+
+[node name="UserName" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "hidE"
+
+[node name="UserPassword" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "12345"
+secret = true
+
+[node name="LabelUserPassword" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Contraseña"
+label_settings = SubResource("LabelSettings_newie")
+
+[node name="LabelError" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_xkqdl")
+horizontal_alignment = 1
+autowrap_mode = 2
+justification_flags = 171
+
+[node name="BtnConnect" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Conectar"
+
+[node name="BtnCreate" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Crear personaje"
+
+[node name="LabelServidor" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Servidor"
+label_settings = SubResource("LabelSettings_newie")
+
+[node name="Servidor" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "127.0.0.1"
+
+[node name="LabelPuerto" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Puerto"
+label_settings = SubResource("LabelSettings_newie")
+
+[node name="Puerto" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "7666"
+
+[node name="LabelCheckMusicOn" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Música"
+label_settings = SubResource("LabelSettings_newie")
+
+[node name="CheckMusicOn" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+theme_override_fonts/font = ExtResource("6_06j1o")
+
+[node name="BtnExit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_uqnbi")
+text = "Salir"
+
+[connection signal="pressed" from="VBoxContainer/BtnConnect" to="." method="_on_BtnConnect_pressed"]
+[connection signal="pressed" from="VBoxContainer/BtnCreate" to="." method="_on_BtnCreate_pressed"]
+[connection signal="pressed" from="VBoxContainer/BtnExit" to="." method="_on_BtnExit_pressed"]

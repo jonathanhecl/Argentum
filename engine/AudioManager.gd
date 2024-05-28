@@ -9,6 +9,9 @@ func _ready() -> void:
 	add_child(_music_stream)
 
 func play_sfx2d_from_id(id:int, x:int, y:int) -> void:
+	if !Configuration.sound:
+		return
+	
 	var audi_resource = load("res://assets/sounds/%d.wav" % id)
 	if !audi_resource: return
 	
@@ -23,6 +26,9 @@ func play_sfx2d_from_id(id:int, x:int, y:int) -> void:
 	audio_stream.queue_free()
 
 func play_music_from_id(id:int, loops:int = -1) -> void:
+	if !Configuration.music:
+		return
+		
 	var audio_resource = load("res://assets/music/%d.mp3" % id)  
 	if !audio_resource:
 		return

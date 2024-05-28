@@ -1,7 +1,9 @@
 extends Node
 
-@export var create_scene: PackedScene  
-@export var game_scene: PackedScene  
+@export var create_scene_mobile: PackedScene  
+@export var game_scene_mobile: PackedScene  
+@export var create_scene_desktop: PackedScene  
+@export var game_scene_desktop: PackedScene 
 
 enum State{
 	None,
@@ -9,8 +11,9 @@ enum State{
 	Create	
 }
  
-const IP_SERVER = "127.0.0.1"
-const IP_PORT = 7666
+@export var server_ip: LineEdit
+@export var server_port: LineEdit
+@export var music_active: Button
  
 @onready var user_name:LineEdit = find_child("UserName")
 @onready var user_password:LineEdit = find_child("UserPassword")
@@ -25,27 +28,34 @@ func _ready():
 	_protocol.connect("logged", Callable(self, "_on_client_logged"))
 	_protocol.connect("error_message", Callable(self, "_on_error_message")) 
 
-	
 func _on_BtnExit_pressed():
 	get_tree().quit()
  
 func _on_BtnConnect_pressed():
 	if(current_state != State.None): return
 	
+	Configuration.server_ip = server_ip.text
+	Configuration.server_port = server_port.text.to_int()
+	Configuration.music = music_active.button_pressed
+	
 	current_state = State.Login
-	Connection.connect_to_server(IP_SERVER, IP_PORT)
+	Connection.connect_to_server()
 
 func _on_BtnCreate_pressed():
 	if(current_state != State.None): return
 	
+	Configuration.server_ip = server_ip.text
+	Configuration.server_port = server_port.text.to_int()
+	Configuration.music = music_active.button_pressed
+	
 	current_state = State.Create
-	Connection.connect_to_server(IP_SERVER, IP_PORT)
+	Connection.connect_to_server()
 
 func _on_client_connected():
 	if(current_state == State.Create):
-		var scene = create_scene.instantiate()
+		var scene = create_scene_mobile.instantiate()
 		
-		scene.initialize(_protocol) 
+		scene.initialize(_protocol)
 		get_parent().switch_scene(scene)
 	else:
 		_protocol.write_login_existing_char(user_name.text, user_password.text)
@@ -57,7 +67,7 @@ func _on_client_disconnected():
 	current_state = State.None
  
 func _on_client_logged():
-	var scene = game_scene.instantiate()
+	var scene = game_scene_mobile.instantiate()
 	scene.initialize(_protocol)
 	
 	get_parent().switch_scene(scene)

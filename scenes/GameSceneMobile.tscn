@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://ce2b7ta1mef02"]
+
+[ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_o373k"]
+[ext_resource type="PackedScene" uid="uid://k7gwyvd0gtoe" path="res://entities/character/Character.tscn" id="2_bvjqo"]
+[ext_resource type="Script" path="res://scenes/UI.gd" id="3_0kf7o"]
+[ext_resource type="Script" path="res://scenes/WorldContainer.gd" id="4_2xrlj"]
+[ext_resource type="Script" path="res://scenes/MapContainer.gd" id="5_kd5ju"]
+[ext_resource type="PackedScene" uid="uid://dkmf3r5qpjnkw" path="res://ui/mobile/MobileMainPanel.tscn" id="6_1newe"]
+[ext_resource type="PackedScene" uid="uid://cpc0gi8ulup2r" path="res://ui/mobile/VirtualJoystick.tscn" id="7_q1mnn"]
+[ext_resource type="Texture2D" uid="uid://db2bmi25qh8oe" path="res://assets/ui/modocombate.png" id="8_q84ed"]
+
+[node name="GameSceneMobile" type="Node"]
+script = ExtResource("1_o373k")
+character_scene = ExtResource("2_bvjqo")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_0kf7o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="WorldContainer" type="SubViewportContainer" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+script = ExtResource("4_2xrlj")
+
+[node name="World" type="SubViewport" parent="UI/VBoxContainer/WorldContainer"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+size = Vector2i(1280, 536)
+render_target_update_mode = 4
+
+[node name="MainCamera" type="Camera2D" parent="UI/VBoxContainer/WorldContainer/World"]
+
+[node name="MapContainer" type="Node2D" parent="UI/VBoxContainer/WorldContainer/World"]
+script = ExtResource("5_kd5ju")
+
+[node name="MobileMainPanel" parent="UI/VBoxContainer" instance=ExtResource("6_1newe")]
+layout_mode = 2
+
+[node name="FPSLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -175.0
+offset_bottom = 63.0
+
+[node name="VirtualJoystick" parent="UI" instance=ExtResource("7_q1mnn")]
+position = Vector2(80, 325)
+
+[node name="BtnToggleCombat" type="TouchScreenButton" parent="UI"]
+position = Vector2(1071, 433)
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("8_q84ed")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+offset_right = 1085.0
+offset_bottom = 115.0
+scroll_following = true
+
+[connection signal="pressed" from="UI/BtnToggleCombat" to="." method="_on_BtnToggleCombat_pressed"]

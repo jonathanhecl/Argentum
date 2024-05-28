@@ -1,20 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://ce2b7ta1mef02"]
+[gd_scene load_steps=8 format=3 uid="uid://csx6jcm4c5oxu"]
 
-[ext_resource type="Script" path="res://scenes/GameScene.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://k7gwyvd0gtoe" path="res://entities/character/Character.tscn" id="2"]
-[ext_resource type="Script" path="res://scenes/MapContainer.gd" id="3"]
-[ext_resource type="Script" path="res://scenes/UI.gd" id="4"]
-[ext_resource type="Script" path="res://scenes/WorldContainer.gd" id="5"]
-[ext_resource type="PackedScene" uid="uid://cpc0gi8ulup2r" path="res://ui/mobile/VirtualJoystick.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://ui/mobile/MobileMainPanel.tscn" id="8"]
-[ext_resource type="Texture2D" uid="uid://db2bmi25qh8oe" path="res://assets/ui/modocombate.png" id="9"]
+[ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_1iynk"]
+[ext_resource type="PackedScene" uid="uid://k7gwyvd0gtoe" path="res://entities/character/Character.tscn" id="2_uk3x8"]
+[ext_resource type="Script" path="res://scenes/UI.gd" id="3_gu4cf"]
+[ext_resource type="Script" path="res://scenes/WorldContainer.gd" id="4_2ltwx"]
+[ext_resource type="Script" path="res://scenes/MapContainer.gd" id="5_e4jfy"]
+[ext_resource type="PackedScene" uid="uid://dkmf3r5qpjnkw" path="res://ui/mobile/MobileMainPanel.tscn" id="6_fyvc6"]
+[ext_resource type="Texture2D" uid="uid://db2bmi25qh8oe" path="res://assets/ui/modocombate.png" id="8_b7y5a"]
 
-[node name="GameScene" type="Node"]
-script = ExtResource("1")
-character_scene = ExtResource("2")
+[node name="GameSceneMobile" type="Node"]
+script = ExtResource("1_1iynk")
+character_scene = ExtResource("2_uk3x8")
 
 [node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource("4")
+script = ExtResource("3_gu4cf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 anchors_preset = 15
@@ -26,7 +25,7 @@ custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 size_flags_vertical = 3
 stretch = true
-script = ExtResource("5")
+script = ExtResource("4_2ltwx")
 
 [node name="World" type="SubViewport" parent="UI/VBoxContainer/WorldContainer"]
 handle_input_locally = false
@@ -37,9 +36,9 @@ render_target_update_mode = 4
 [node name="MainCamera" type="Camera2D" parent="UI/VBoxContainer/WorldContainer/World"]
 
 [node name="MapContainer" type="Node2D" parent="UI/VBoxContainer/WorldContainer/World"]
-script = ExtResource("3")
+script = ExtResource("5_e4jfy")
 
-[node name="MobileMainPanel" parent="UI/VBoxContainer" instance=ExtResource("8")]
+[node name="MobileMainPanel" parent="UI/VBoxContainer" instance=ExtResource("6_fyvc6")]
 layout_mode = 2
 
 [node name="FPSLabel" type="Label" parent="UI"]
@@ -49,13 +48,10 @@ anchor_right = 1.0
 offset_left = -175.0
 offset_bottom = 63.0
 
-[node name="VirtualJoystick" parent="UI" instance=ExtResource("7")]
-position = Vector2(80, 325)
-
 [node name="BtnToggleCombat" type="TouchScreenButton" parent="UI"]
 position = Vector2(1071, 433)
 scale = Vector2(2.5, 2.5)
-texture_normal = ExtResource("9")
+texture_normal = ExtResource("8_b7y5a")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 offset_right = 1085.0
