@@ -17,10 +17,10 @@ func disconnect_from_server():
 	print("disconnect_from_server")
 	_client.disconnect_from_host()
 	
-func connect_to_server():
-	print("connect_to_server")
-	_client.connect_to_host(Configuration.server_ip, Configuration.server_port)
-	print(_client.get_status(), Configuration.server_ip, Configuration.server_port)
+func connect_to_server() -> Error:
+	var err = _client.connect_to_host(Configuration.server_ip, Configuration.server_port)
+	print("connect_to_server: ", err, "-", _client.get_status(), " (", Configuration.server_ip, ":", Configuration.server_port, ")")
+	return err
 
 func process_connection():
 	await get_tree().create_timer(0.1).timeout

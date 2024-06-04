@@ -5,6 +5,7 @@ signal item_selected
 
 @onready var quantityLabel = find_child("QuantityLabel")
 @onready var equippedLabel = find_child("EquippedLabel")
+@onready var selectedLabel = find_child("SelectedLabel")
 @onready var iconTexture = find_child("IconTexture")
 
 @export_range(-1, 1000, 1) var inventory_index: int = -1
@@ -12,7 +13,6 @@ signal item_selected
 var item:Item = null: set = _set_item
 var quantity:int = 0: set = _set_quantity
 var equipped:bool = false: set = _set_equipped
- 
 
 func set_item(index:int, item:Item, quantity:int, equipped:bool) -> void:
 	self.inventory_index = index
@@ -62,3 +62,7 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			emit_signal("item_selected")
+			if selectedLabel.visible:
+				selectedLabel.visible = false
+			else: 
+				selectedLabel.visible = true

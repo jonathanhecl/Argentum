@@ -17,6 +17,7 @@ func initialize(player_data:PlayerData, protocol:GameProtocol):
 		slot = slot as ItemSlot
 		slot.inventory_index = i
 		slot.connect("item_selected", Callable(self, "_on_item_selected").bind(slot))
+		slot.selectedLabel.visible = false
 		i += 1
 	
 	

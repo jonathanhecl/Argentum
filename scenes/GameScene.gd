@@ -42,7 +42,7 @@ func _input(event):
 		return _get_movement_heading(Vector2.LEFT)
 	if event.is_action_pressed("move_right"):
 		return _get_movement_heading(Vector2.RIGHT)
-	print("tecla ", event.to_string())
+	#print("tecla ", event.to_string())
 		
 func _on_disconnected():
 	var scene = load("res://scenes/LobbyScene.tscn").instantiate()
@@ -390,8 +390,8 @@ func get_input_heading() -> int:
 	return input
 	
 func _notification(what: int) -> void:
-#	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
-#		_protocol.write_quit()
+	#if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+		#_protocol.write_quit()
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

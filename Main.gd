@@ -15,6 +15,7 @@ func _ready():
 			Configuration.interface_mode = 1
 		"Android", "iOS":
 			Configuration.interface_mode = 0
+	Configuration.interface_mode = 0
 	
 	if Configuration.interface_mode == 0:
 		ProjectSettings.set_setting("display/window/size/resizable", false)

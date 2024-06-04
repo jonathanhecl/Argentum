@@ -23,8 +23,15 @@ layout_mode = 2
 mouse_filter = 2
 stretch_mode = 4
 
+[node name="SelectedLabel" type="Label" parent="."]
+self_modulate = Color(0.661437, 0.627072, 0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+text = "S"
+horizontal_alignment = 2
+clip_text = true
+
 [node name="EquippedLabel" type="Label" parent="."]
-visible = false
 self_modulate = Color(0.121569, 0.87451, 0.203922, 1)
 layout_mode = 2
 size_flags_vertical = 8

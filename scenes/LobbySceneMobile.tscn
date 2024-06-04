@@ -1,30 +1,27 @@
 [gd_scene load_steps=10 format=3 uid="uid://buphpinlgi60c"]
 
 [ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1_2nqx2"]
-[ext_resource type="PackedScene" path="res://ui/mobile/InventoryContainerMobile.tscn" id="2_c8jww"]
+[ext_resource type="PackedScene" uid="uid://dwuptfm1phnlt" path="res://ui/mobile/InventoryContainerMobile.tscn" id="2_c8jww"]
 [ext_resource type="PackedScene" uid="uid://ce2b7ta1mef02" path="res://scenes/GameSceneMobile.tscn" id="3_emslq"]
 [ext_resource type="PackedScene" uid="uid://csx6jcm4c5oxu" path="res://scenes/GameSceneDesktop.tscn" id="4_j872d"]
 [ext_resource type="Texture2D" uid="uid://d0jtkawhllht7" path="res://assets/ui/background_lobby.png" id="4_ji7ds"]
-[ext_resource type="Theme" path="res://assets/theme.theme" id="5_uqnbi"]
 [ext_resource type="FontFile" uid="uid://tlecdggw2uka" path="res://assets/fonts/source_code_pro/SourceCodePro-Black.ttf" id="6_06j1o"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_newie"]
-line_spacing = 4.0
-shadow_size = 5
-shadow_color = Color(0, 0, 0, 1)
+[ext_resource type="Theme" uid="uid://bh1bkbf677702" path="res://assets/themeMobile.theme" id="6_nlfeb"]
+[ext_resource type="LabelSettings" uid="uid://bigkpbdlgbglw" path="res://scenes/LobbySceneMobile.tres" id="7_ujjrq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xkqdl"]
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="LobbyScene" type="Node" node_paths=PackedStringArray("server_ip", "server_port", "music_active")]
+[node name="LobbyScene" type="Node" node_paths=PackedStringArray("server_ip", "server_port", "music_active", "label_error")]
 script = ExtResource("1_2nqx2")
 create_scene_mobile = ExtResource("2_c8jww")
 game_scene_mobile = ExtResource("3_emslq")
 game_scene_desktop = ExtResource("4_j872d")
-server_ip = NodePath("VBoxContainer/Servidor")
-server_port = NodePath("VBoxContainer/Puerto")
-music_active = NodePath("VBoxContainer/CheckMusicOn")
+server_ip = NodePath("HBoxContainer/VBoxContainer/Servidor")
+server_port = NodePath("HBoxContainer/VBoxContainer/Puerto")
+music_active = NodePath("HBoxContainer/VBoxContainer/CheckMusicOn")
+label_error = NodePath("HBoxContainer/VBoxContainer/LabelError")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640.25, 359.75)
@@ -32,91 +29,110 @@ scale = Vector2(1.11241, 0.943359)
 texture = ExtResource("4_ji7ds")
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(50, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelUserName" type="Label" parent="VBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 10)
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
-text = "Nombre"
-label_settings = SubResource("LabelSettings_newie")
+size_flags_horizontal = 0
 
-[node name="UserName" type="LineEdit" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="LabelUserName" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_nlfeb")
+text = "Nombre"
+label_settings = ExtResource("7_ujjrq")
+
+[node name="UserName" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_nlfeb")
 text = "hidE"
 
-[node name="UserPassword" type="LineEdit" parent="VBoxContainer"]
+[node name="UserPassword" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "12345"
 secret = true
 
-[node name="LabelUserPassword" type="Label" parent="VBoxContainer"]
+[node name="LabelUserPassword" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Contraseña"
-label_settings = SubResource("LabelSettings_newie")
+label_settings = ExtResource("7_ujjrq")
 
-[node name="LabelError" type="Label" parent="VBoxContainer"]
+[node name="LabelError" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_xkqdl")
 horizontal_alignment = 1
-autowrap_mode = 2
 justification_flags = 171
 
-[node name="BtnConnect" type="Button" parent="VBoxContainer"]
+[node name="BtnConnect" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Conectar"
 
-[node name="BtnCreate" type="Button" parent="VBoxContainer"]
+[node name="BtnCreate" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Crear personaje"
 
-[node name="LabelServidor" type="Label" parent="VBoxContainer"]
+[node name="LabelServidor" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Servidor"
-label_settings = SubResource("LabelSettings_newie")
+label_settings = ExtResource("7_ujjrq")
 
-[node name="Servidor" type="LineEdit" parent="VBoxContainer"]
+[node name="Servidor" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "127.0.0.1"
 
-[node name="LabelPuerto" type="Label" parent="VBoxContainer"]
+[node name="LabelPuerto" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Puerto"
-label_settings = SubResource("LabelSettings_newie")
+label_settings = ExtResource("7_ujjrq")
 
-[node name="Puerto" type="LineEdit" parent="VBoxContainer"]
+[node name="Puerto" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "7666"
 
-[node name="LabelCheckMusicOn" type="Label" parent="VBoxContainer"]
+[node name="LabelCheckMusicOn" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Música"
-label_settings = SubResource("LabelSettings_newie")
+label_settings = ExtResource("7_ujjrq")
 
-[node name="CheckMusicOn" type="CheckButton" parent="VBoxContainer"]
+[node name="CheckMusicOn" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 theme_override_fonts/font = ExtResource("6_06j1o")
 
-[node name="BtnExit" type="Button" parent="VBoxContainer"]
+[node name="BtnExit" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_uqnbi")
+theme = ExtResource("6_nlfeb")
 text = "Salir"
 
-[connection signal="pressed" from="VBoxContainer/BtnConnect" to="." method="_on_BtnConnect_pressed"]
-[connection signal="pressed" from="VBoxContainer/BtnCreate" to="." method="_on_BtnCreate_pressed"]
-[connection signal="pressed" from="VBoxContainer/BtnExit" to="." method="_on_BtnExit_pressed"]
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/BtnConnect" to="." method="_on_BtnConnect_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/BtnCreate" to="." method="_on_BtnCreate_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/BtnExit" to="." method="_on_BtnExit_pressed"]

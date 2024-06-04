@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://lhnk4gaokq4c" path="res://scenes/CreateCharacter.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ce2b7ta1mef02" path="res://scenes/GameSceneMobile.tscn" id="3_ik7bk"]
-[ext_resource type="Theme" path="res://assets/theme.theme" id="4"]
 [ext_resource type="Texture2D" uid="uid://d0jtkawhllht7" path="res://assets/ui/background_lobby.png" id="5_8p1p6"]
+[ext_resource type="Theme" uid="uid://bh1bkbf677702" path="res://assets/themeMobile.theme" id="5_leh20"]
 [ext_resource type="FontFile" uid="uid://tlecdggw2uka" path="res://assets/fonts/source_code_pro/SourceCodePro-Black.ttf" id="6_grncp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_newie"]
@@ -16,13 +16,14 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="LobbyScene" type="Node" node_paths=PackedStringArray("server_ip", "server_port", "music_active")]
+[node name="LobbyScene" type="Node" node_paths=PackedStringArray("server_ip", "server_port", "music_active", "label_error")]
 script = ExtResource("1")
 create_scene_mobile = ExtResource("2")
 game_scene_mobile = ExtResource("3_ik7bk")
 server_ip = NodePath("Servidor")
 server_port = NodePath("Puerto")
 music_active = NodePath("CheckMusicOn")
+label_error = NodePath("LabelError")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640.25, 359.75)
@@ -42,7 +43,7 @@ offset_right = 155.5
 offset_bottom = 333.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Salir"
 
 [node name="BtnConnect" type="Button" parent="."]
@@ -57,7 +58,7 @@ offset_right = 155.5
 offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Conectar"
 
 [node name="BtnCreate" type="Button" parent="."]
@@ -72,7 +73,7 @@ offset_right = 155.5
 offset_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Crear personaje"
 
 [node name="LabelUserName" type="Label" parent="."]
@@ -87,7 +88,7 @@ offset_right = 88.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Nombre"
 label_settings = SubResource("LabelSettings_newie")
 
@@ -103,7 +104,7 @@ offset_right = 135.0
 offset_bottom = -27.3
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "hidE"
 
 [node name="UserPassword" type="LineEdit" parent="."]
@@ -118,7 +119,7 @@ offset_right = 135.0
 offset_bottom = 16.7
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "12345"
 secret = true
 
@@ -134,7 +135,7 @@ offset_right = 21.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Contraseña"
 label_settings = SubResource("LabelSettings_newie")
 
@@ -160,7 +161,7 @@ offset_right = -432.0
 offset_bottom = -302.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Servidor"
 label_settings = SubResource("LabelSettings_newie")
 
@@ -176,7 +177,7 @@ offset_right = -357.0
 offset_bottom = -309.3
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "127.0.0.1"
 
 [node name="LabelPuerto" type="Label" parent="."]
@@ -191,7 +192,7 @@ offset_right = -432.0
 offset_bottom = -268.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Puerto"
 label_settings = SubResource("LabelSettings_newie")
 
@@ -207,7 +208,7 @@ offset_right = -357.0
 offset_bottom = -275.3
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "7666"
 
 [node name="LabelCheckMusicOn" type="Label" parent="."]
@@ -222,7 +223,7 @@ offset_right = -430.0
 offset_bottom = -232.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 text = "Música"
 label_settings = SubResource("LabelSettings_newie")
 
@@ -231,7 +232,7 @@ offset_left = 109.0
 offset_top = 92.0
 offset_right = 153.4
 offset_bottom = 116.4
-theme = ExtResource("4")
+theme = ExtResource("5_leh20")
 theme_override_fonts/font = ExtResource("6_grncp")
 
 [connection signal="pressed" from="BtnExit" to="." method="_on_BtnExit_pressed"]

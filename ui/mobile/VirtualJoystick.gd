@@ -20,6 +20,8 @@ func _get_texture_size() -> Vector2:
 
 func _on_VirtualJoystick_pressed() -> void:
 	_touched = true
+	$"../RichTextLabel".text = "joy"
 	
 func _on_VirtualJoystick_released() -> void:
 	_touched = false 
+	$"../RichTextLabel".text = "joysaca"
