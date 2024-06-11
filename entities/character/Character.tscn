@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://k7gwyvd0gtoe"]
+[gd_scene load_steps=4 format=3 uid="uid://k7gwyvd0gtoe"]
 
 [ext_resource type="Script" path="res://entities/character/Character.gd" id="1"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 9.0
 height = 18.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7wui4"]
+font_color = Color(0.849304, 0.849303, 0, 1)
 
 [node name="Character" type="Area2D"]
 script = ExtResource("1")
@@ -20,9 +23,14 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -68.0
+offset_top = -1.0
 offset_right = 68.0
-offset_bottom = 22.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "asdasdasdasdaasdasdasdasdassdasdasdasdasdas"
+horizontal_alignment = 1
+autowrap_mode = 1
 clip_text = true
 
 [node name="Outfit" type="Node2D" parent="."]
@@ -58,11 +66,14 @@ wait_time = 10.0
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -88.5
-offset_top = 19.0
-offset_right = 88.5
-offset_bottom = 88.0
+offset_left = -88.0
+offset_top = -93.0
+offset_right = 89.0
+offset_bottom = -24.0
+grow_horizontal = 2
 text = "sadasdsad
 asdasdassa"
+label_settings = SubResource("LabelSettings_7wui4")
+horizontal_alignment = 1
 
 [connection signal="timeout" from="RemoveDialog" to="." method="_on_RemoveDialog_timeout"]

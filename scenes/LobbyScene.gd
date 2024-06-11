@@ -85,8 +85,8 @@ func _on_client_logged():
 		scene = game_scene_mobile.instantiate()
 	else:
 		scene = game_scene_desktop.instantiate()
-	scene.initialize(_protocol)
 	
+	scene.initialize(_protocol)
 	get_parent().switch_scene(scene)
 
 func _on_error_message(message:String):

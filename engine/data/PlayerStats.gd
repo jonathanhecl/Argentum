@@ -15,8 +15,8 @@ signal change_elv(value)
 
 signal change_spell_slot(slot, name)
 
-var hp:int: set = set_hp
-var max_hp:int: set = set_max_hp
+var hp:int
+var max_hp:int
 
 var mp:int: set = set_mp
 var max_mp:int: set = set_max_mp
@@ -46,12 +46,9 @@ func set_spell(slot:int, text:String) -> void:
 	spells[slot] = text
 	emit_signal("change_spell_slot", slot, text)
 
-func set_hp(value:int) -> void:
-	hp	= value
-	emit_signal("change_hp", hp, max_hp)
-	
-func set_max_hp(value:int) -> void:
-	max_hp = value
+func set_hp(current: int, max: int) -> void:
+	hp = current
+	max_hp = max
 	emit_signal("change_hp", hp, max_hp)
  
 func set_mp(value:int) -> void:

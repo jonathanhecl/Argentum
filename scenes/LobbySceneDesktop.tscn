@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://264boseoei88"]
+[gd_scene load_steps=10 format=3 uid="uid://264boseoei88"]
 
 [ext_resource type="Script" path="res://scenes/LobbyScene.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://lhnk4gaokq4c" path="res://scenes/CreateCharacter.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ce2b7ta1mef02" path="res://scenes/GameSceneMobile.tscn" id="3_ik7bk"]
+[ext_resource type="PackedScene" uid="uid://csx6jcm4c5oxu" path="res://scenes/GameSceneDesktop.tscn" id="4_0ksby"]
 [ext_resource type="Texture2D" uid="uid://d0jtkawhllht7" path="res://assets/ui/background_lobby.png" id="5_8p1p6"]
 [ext_resource type="Theme" uid="uid://bh1bkbf677702" path="res://assets/themeMobile.theme" id="5_leh20"]
 [ext_resource type="FontFile" uid="uid://tlecdggw2uka" path="res://assets/fonts/source_code_pro/SourceCodePro-Black.ttf" id="6_grncp"]
@@ -20,6 +21,8 @@ shadow_color = Color(0, 0, 0, 1)
 script = ExtResource("1")
 create_scene_mobile = ExtResource("2")
 game_scene_mobile = ExtResource("3_ik7bk")
+create_scene_desktop = ExtResource("2")
+game_scene_desktop = ExtResource("4_0ksby")
 server_ip = NodePath("Servidor")
 server_port = NodePath("Puerto")
 music_active = NodePath("CheckMusicOn")

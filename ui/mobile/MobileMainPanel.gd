@@ -38,24 +38,24 @@ func _on_BtnSwitchPanel_pressed() -> void:
 		_ntnSwitchPanel.texture_normal = _inventoryTexture
 		
 func _on_change_hp(value:int, max_value:int) -> void:
-	_barHP.value = value
 	_barHP.max_value = max_value
+	_barHP.value = value
 	
 func _on_change_mp(value:int, max_value:int) -> void:
-	_barMP.value = value
 	_barMP.max_value = max_value
+	_barMP.value = value
 	
 func _on_change_sta(value:int, max_value:int) -> void:
-	_barSTA.value = value
 	_barSTA.max_value = max_value
+	_barSTA.value = value
 	
 func _on_change_ham(value:int, max_value:int) -> void:
-	_barHAM.value = value
 	_barHAM.max_value = max_value
+	_barHAM.value = value
 	
 func _on_change_sed(value:int, max_value:int) -> void:
-	_barSED.value = value
 	_barSED.max_value = max_value
+	_barSED.value = value
 	
 func _on_change_gold(value:int) -> void:
 	_goldLabel.text = str(value)

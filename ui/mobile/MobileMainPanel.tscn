@@ -121,6 +121,7 @@ offset_right = 1.0
 offset_bottom = 23.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BackgroundColor/Stats"]
+visible = false
 layout_mode = 2
 
 [node name="StatsBarSED" parent="BackgroundColor/Stats/HBoxContainer" instance=ExtResource("8")]
@@ -174,6 +175,7 @@ offset_right = 1.0
 offset_bottom = 23.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="BackgroundColor/Stats"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -181,8 +183,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2")
-expand_mode = 1
-stretch_mode = 1
+stretch_mode = 3
 
 [node name="GoldLabel" type="Label" parent="BackgroundColor/Stats/HBoxContainer2"]
 custom_minimum_size = Vector2(150, 0)

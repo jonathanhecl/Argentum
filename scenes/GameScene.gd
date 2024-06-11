@@ -211,8 +211,7 @@ func _parse_block_position(data:Dictionary) -> void:
 		_map_container.current_map.set_tile_block(x, y, data.value)
  
 func _parse_update_player_stats(stats:Dictionary) -> void:
-	_player_data.stats.hp = stats.min_hp
-	_player_data.stats.max_hp = stats.max_hp
+	_player_data.stats.set_hp(stats.min_hp, stats.max_hp)
 	
 	_player_data.stats.mp = stats.min_mp
 	_player_data.stats.max_mp = stats.max_hp
@@ -380,7 +379,7 @@ func _get_movement_heading(velocity:Vector2) -> int:
 	return 0
 	
 func get_input_heading() -> int:
-	return _get_movement_heading(_virtualJoystick.velocity)
+	#return _get_movement_heading(_virtualJoystick.velocity)
 	
 	var input = 0
 	

@@ -35,6 +35,10 @@ var helmet := 0: set = set_helmet
 var weapon := 0: set = set_weapon
 var shield := 0: set = set_shield
 
+var helmet_is_loaded: bool = false
+var weapon_is_loaded: bool = false
+var shield_is_loaded: bool = false
+
 func _ready() -> void:
 	pass # Replace with function body. 
 
@@ -64,8 +68,9 @@ func set_is_moving(value:bool) -> void:
 	if !is_moving:
 		method = "stop"
 		
+		
 	for node in get_node("Outfit").get_children():
-		if node.has_method(method):
+		if node.has_method(method) && node.visible:
 			node.call(method)
 	
 func set_character_name(name:String) -> void:

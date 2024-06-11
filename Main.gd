@@ -7,7 +7,6 @@ var current_scene:Node = null
 var _protocol:GameProtocol = null
 
 func _ready():
-	Connection.connect("message_received", Callable(self, "_on_message_received"))
 	var scene: Node
 	
 	match OS.get_name():
@@ -15,7 +14,6 @@ func _ready():
 			Configuration.interface_mode = 1
 		"Android", "iOS":
 			Configuration.interface_mode = 0
-	Configuration.interface_mode = 0
 	
 	if Configuration.interface_mode == 0:
 		ProjectSettings.set_setting("display/window/size/resizable", false)
@@ -23,8 +21,9 @@ func _ready():
 	else:
 		ProjectSettings.set_setting("display/window/size/resizable", true)
 		scene = initial_scene_desktop.instantiate()
-		
+	
 	_protocol = GameProtocol.new()
+	Connection.connect("message_received", Callable(self, "_on_message_received"))
 
 	scene._protocol = _protocol
 	switch_scene(scene)

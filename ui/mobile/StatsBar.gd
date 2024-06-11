@@ -1,13 +1,12 @@
-@tool
 extends Control
 
-var _bar_width = 0 
+var _bar_width = 0
 
 var value:int = 1: set = set_value
 var max_value:int = 1: set = set_max_value
 	
 func _ready() -> void: 
-	_bar_width = $Color.size.x 
+	_bar_width = $Color.size.x
 	
 func set_value(v:int) -> void:
 	value = v

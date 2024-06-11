@@ -4,11 +4,10 @@ extends CanvasLayer
 @onready var inventoryContainer = find_child("InventoryContainerGUI")
 
 @onready var _main_panel = find_child("MobileMainPanel") 
-@onready var _console = $RichTextLabel
+@onready var _console = find_child("RichTextLabel")
 
 var _protocol:GameProtocol
 var _player_data:PlayerData
-
 
 func initialize(player_data:PlayerData, protocol:GameProtocol) -> void:
 	_protocol = protocol
