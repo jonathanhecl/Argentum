@@ -6,6 +6,8 @@ var value:int = 1: set = set_value
 var max_value:int = 1: set = set_max_value
 	
 func _ready() -> void: 
+	if get_parent().name == "root":
+		print("escena sola")
 	_bar_width = $Color.size.x
 	
 func set_value(v:int) -> void:
