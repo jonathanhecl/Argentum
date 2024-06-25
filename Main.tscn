@@ -32,23 +32,31 @@ offset_top = 317.0
 offset_right = 563.0
 offset_bottom = 658.0
 
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 570.0
-offset_top = 612.0
-offset_right = 726.0
-offset_bottom = 658.0
-text = "Continuar"
-
 [node name="CheckBox" type="CheckBox" parent="Control"]
 layout_mode = 0
-offset_left = 566.0
-offset_top = 564.0
-offset_right = 738.0
-offset_bottom = 619.0
+offset_left = 574.0
+offset_top = 507.0
+offset_right = 732.0
+offset_bottom = 545.0
 text = "Automatico (5s)"
 text_overrun_behavior = 3
 clip_text = true
 
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 555.0
+offset_right = 734.0
+offset_bottom = 601.0
+text = "Continuar"
+
+[node name="Button2" type="Button" parent="Control"]
+offset_left = 578.0
+offset_top = 610.0
+offset_right = 734.0
+offset_bottom = 656.0
+text = "Salir"
+
 [connection signal="gui_input" from="Control/ItemList" to="." method="_on_item_list_gui_input"]
 [connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_button_2_pressed"]

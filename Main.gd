@@ -16,9 +16,13 @@ var _protocol:GameProtocol = null
 
 var count: int = 5
 
-var list:Variant
+var list:Array
+
+var config = ConfigFile.new()
 
 func _ready():	
+	config.load("user://config.ini")
+	
 	add_child(http_request)
 	http_request.request_completed.connect(_load_server_list)
 	var err = http_request.request(str(URL_SERVER_LIST, "?", randi()))
@@ -31,6 +35,10 @@ func _ready():
 	
 	_protocol = GameProtocol.new()
 	Connection.connect("message_received", Callable(self, "_on_message_received"))
+
+func _input(event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
 
 func switch_scene(scene):
 	if current_scene:
@@ -55,6 +63,12 @@ func show_server_list():
 		
 	if server_list.item_count>0:
 		server_list.select(0)
+		var title = config.get_value("INIT", "server", "")
+		if len(title) > 0:
+			for i in range(list.size()):
+				if list[i].title == title:
+					server_list.select(i)
+					server_automatic.button_pressed = config.get_value("INIT", "autoconnect", false)
 		server_list.grab_focus()
 
 func _on_item_list_gui_input(event: InputEvent) -> void:
@@ -75,6 +89,9 @@ func _timer_count():
 	
 func _on_button_pressed() -> void:
 	if len(server_list.get_selected_items())>0:
+		config.set_value("INIT", "server", list[server_list.get_selected_items()[0]].title)
+		config.set_value("INIT", "autoconnect", server_automatic.button_pressed)
+		config.save("user://config.ini")
 		print(list[server_list.get_selected_items()[0]])
 		await get_tree().create_timer(1).timeout
 		go_to_lobby()
@@ -97,3 +114,7 @@ func go_to_lobby():
 		
 		scene._protocol = _protocol
 		switch_scene(scene)
+
+
+func _on_button_2_pressed() -> void:
+	get_tree().quit()
